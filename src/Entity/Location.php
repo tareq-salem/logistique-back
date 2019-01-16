@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Category;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LocationRepository")
@@ -36,11 +37,12 @@ class Location
      */
     private $postal_code;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Country", inversedBy="locations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $country;
+    
     public function getCity(): ?string
     {
         return $this->city;
@@ -85,6 +87,18 @@ class Location
     public function setPostalCode(string $postal_code): self
     {
         $this->postal_code = $postal_code;
+
+        return $this;
+    }
+
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }
