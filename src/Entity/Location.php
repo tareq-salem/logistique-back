@@ -42,7 +42,12 @@ class Location
      * @ORM\JoinColumn(nullable=false)
      */
     private $country;
-    
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     public function getCity(): ?string
     {
         return $this->city;
