@@ -3,11 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Entity\SuperClass as SuperClass;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContractTypeRepository")
  */
-class ContractType
+class ContractType extends SuperClass
 {
     /**
      * @ORM\Id()

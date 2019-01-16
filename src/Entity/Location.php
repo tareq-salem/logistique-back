@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Entity\SuperClass as SuperClass;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LocationRepository")
  */
-class Location
+class Location extends SuperClass
 {
     /**
      * @ORM\Id()
