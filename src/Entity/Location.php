@@ -3,12 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Category;
+use App\Entity\SuperClass as SuperClass;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LocationRepository")
  */
-class Location
+class Location extends SuperClass
 {
     /**
      * @ORM\Id()
