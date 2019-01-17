@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -98,6 +100,16 @@ class Offer
      * @ORM\JoinColumn(nullable=false)
      */
     private $contratType;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\LocationOffer", mappedBy="offer", orphanRemoval=true)
+     */
+    private $locationOffers;
+
+    public function __construct()
+    {
+        $this->locationOffers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -269,6 +281,21 @@ class Offer
     {
         $this->status = $status;
 
+    /**
+     * @return Collection|LocationOffer[]
+     */
+    public function getLocationOffers(): Collection
+    {
+        return $this->locationOffers;
+    }
+
+    public function addLocationOffer(LocationOffer $locationOffer): self
+    {
+        if (!$this->locationOffers->contains($locationOffer)) {
+            $this->locationOffers[] = $locationOffer;
+            $locationOffer->setOffer($this);
+        }
+
         return $this;
     }
 
@@ -292,6 +319,16 @@ class Offer
     public function setContratType(?ContractType $contratType): self
     {
         $this->contratType = $contratType;
+
+    public function removeLocationOffer(LocationOffer $locationOffer): self
+    {
+        if ($this->locationOffers->contains($locationOffer)) {
+            $this->locationOffers->removeElement($locationOffer);
+            // set the owning side to null (unless already changed)
+            if ($locationOffer->getOffer() === $this) {
+                $locationOffer->setOffer(null);
+            }
+        }
 
         return $this;
     }

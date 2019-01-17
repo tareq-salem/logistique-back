@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\SuperClass as SuperClass;
 use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Category;
@@ -43,6 +45,17 @@ class Location extends SuperClass
      * @ORM\JoinColumn(nullable=false)
      */
     private $country;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\LocationOffer", mappedBy="location", orphanRemoval=true)
+     */
+    private $locationOffers;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->locationOffers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -105,6 +118,37 @@ class Location extends SuperClass
     public function setCountry(?Country $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|LocationOffer[]
+     */
+    public function getLocationOffers(): Collection
+    {
+        return $this->locationOffers;
+    }
+
+    public function addLocationOffer(LocationOffer $locationOffer): self
+    {
+        if (!$this->locationOffers->contains($locationOffer)) {
+            $this->locationOffers[] = $locationOffer;
+            $locationOffer->setLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLocationOffer(LocationOffer $locationOffer): self
+    {
+        if ($this->locationOffers->contains($locationOffer)) {
+            $this->locationOffers->removeElement($locationOffer);
+            // set the owning side to null (unless already changed)
+            if ($locationOffer->getLocation() === $this) {
+                $locationOffer->setLocation(null);
+            }
+        }
 
         return $this;
     }
