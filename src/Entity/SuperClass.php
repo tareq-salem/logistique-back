@@ -6,7 +6,7 @@ use App\Repository\SuperClassRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\SuperClassRepository")
+ * @ORM\MappedSuperClass
  */
 
 class SuperClass extends SuperClassRepository
