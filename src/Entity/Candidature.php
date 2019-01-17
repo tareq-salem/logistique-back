@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Entity\SuperClass as SuperClass;
+use App\Entity\SuperClass as SuperClass;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CandidatureRepository")
