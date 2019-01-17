@@ -280,6 +280,7 @@ class Offer
     public function setStatus(?Status $status): self
     {
         $this->status = $status;
+    }
 
     /**
      * @return Collection|LocationOffer[]
@@ -319,6 +320,7 @@ class Offer
     public function setContratType(?ContractType $contratType): self
     {
         $this->contratType = $contratType;
+    }
 
     public function removeLocationOffer(LocationOffer $locationOffer): self
     {
