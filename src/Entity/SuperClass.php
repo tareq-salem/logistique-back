@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use App\Repository\SuperClassRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SuperClassRepository")
  */
-class SuperClass
+
+class SuperClass extends SuperClassRepository
 {
 
     /**

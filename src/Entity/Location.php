@@ -37,6 +37,12 @@ class Location extends SuperClass
      */
     private $postal_code;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Country", inversedBy="locations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $country;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +92,18 @@ class Location extends SuperClass
     public function setPostalCode(string $postal_code): self
     {
         $this->postal_code = $postal_code;
+
+        return $this;
+    }
+
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }
