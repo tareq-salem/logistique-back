@@ -11,12 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 class SuperClass extends SuperClassRepository
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * @ORM\Column(type="datetime")
@@ -27,11 +21,7 @@ class SuperClass extends SuperClassRepository
      * @ORM\Column(type="datetime")
      */
     private $modified_at;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
