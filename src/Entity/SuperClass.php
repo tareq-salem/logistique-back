@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\SuperClassRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\MappedSuperclass
  */
 
-class SuperClass extends SuperClassRepository
+class SuperClass
 {
 
     /**
@@ -21,6 +20,14 @@ class SuperClass extends SuperClassRepository
      * @ORM\Column(type="datetime")
      */
     private $modified_at;
+
+    public function __construct() {
+        $this->setModifiedAt(new \DateTime('now'));
+
+        if ($this->getCreatedAt() === null) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
+    }
     
 
     public function getCreatedAt(): ?\DateTimeInterface
