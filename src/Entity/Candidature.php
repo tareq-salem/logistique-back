@@ -48,6 +48,11 @@ class Candidature extends SuperClass
      */
     private $candidate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\LocationOffer", inversedBy="candidature")
+     */
+    private $locationOffer;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +126,18 @@ class Candidature extends SuperClass
     public function setCandidate(?Candidate $candidate): self
     {
         $this->candidate = $candidate;
+
+        return $this;
+    }
+
+    public function getLocationOffer(): ?LocationOffer
+    {
+        return $this->locationOffer;
+    }
+
+    public function setLocationOffer(?LocationOffer $locationOffer): self
+    {
+        $this->locationOffer = $locationOffer;
 
         return $this;
     }
