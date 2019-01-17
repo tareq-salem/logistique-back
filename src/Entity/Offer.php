@@ -84,6 +84,24 @@ class Offer
     private $benefits;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Status", inversedBy="offers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\OfferType", inversedBy="offers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $offerType;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ContractType", inversedBy="offers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $contratType;
+    
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\LocationOffer", mappedBy="offer", orphanRemoval=true)
      */
     private $locationOffers;
@@ -254,6 +272,15 @@ class Offer
         return $this;
     }
 
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
+
     /**
      * @return Collection|LocationOffer[]
      */
@@ -271,6 +298,27 @@ class Offer
 
         return $this;
     }
+
+    public function getOfferType(): ?OfferType
+    {
+        return $this->offerType;
+    }
+
+    public function setOfferType(?OfferType $offerType): self
+    {
+        $this->offerType = $offerType;
+
+        return $this;
+    }
+
+    public function getContratType(): ?ContractType
+    {
+        return $this->contratType;
+    }
+
+    public function setContratType(?ContractType $contratType): self
+    {
+        $this->contratType = $contratType;
 
     public function removeLocationOffer(LocationOffer $locationOffer): self
     {
