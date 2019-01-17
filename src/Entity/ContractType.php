@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\SuperClass as SuperClass;
 
@@ -26,6 +28,17 @@ class ContractType extends SuperClass
      * @ORM\Column(type="string", length=255)
      */
     private $color;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="contratType")
+     */
+    private $offers;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->offers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -52,6 +65,37 @@ class ContractType extends SuperClass
     public function setColor(string $color): self
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setContratType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+            // set the owning side to null (unless already changed)
+            if ($offer->getContratType() === $this) {
+                $offer->setContratType(null);
+            }
+        }
 
         return $this;
     }
