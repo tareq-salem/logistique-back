@@ -7,10 +7,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\SuperClass as SuperClass;
 
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CandidateRepository")
  */
+
 class Candidate extends SuperClass
 {
     /**
