@@ -179,7 +179,6 @@ class AppFixtures extends Fixture
             $offer->setStatus($status[mt_rand(0, 2)]);
             $manager->persist($offer);
         }
-
         $manager->flush();
     }
 }
