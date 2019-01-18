@@ -25,7 +25,7 @@ class SlugTest extends TestCase
 
     public function test3()
     {
-        $strToTest = 'Une chaine de caractère à slugger';
+        $strToTest = 'Une chaîne de caractère à slugger';
         $slugger = new Slugger();
         $strExpected = 'une-chaine-de-caractere-a-slugger';
         $this->assertSame($strExpected, $slugger->slugify($strToTest));
@@ -38,7 +38,6 @@ class SlugTest extends TestCase
         $strExpected = 'une-chaine-de-caractere-a-re-slugger';
         $this->assertSame($strExpected, $slugger->slugify($strToTest));
     }
-
 
     public function test5()
     {
