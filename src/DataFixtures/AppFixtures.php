@@ -29,13 +29,12 @@ class AppFixtures extends Fixture
     {
 //        $faker = Factory::create('fr_FR');
         //CREATION DE L'ADMIN
-        $dateTime = new \DateTime();
+        //$dateTime = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $admin = new User();
         $admin->setLogin('admin');
         //$password = $this->encoder->encodePassword($admin, 'password');
         $admin->setPassword('password');
-        $admin->setCreatedAt($dateTime);
-        $admin->setModifiedAt($dateTime);
+
 
         $manager->persist($admin);
         $manager->flush();
