@@ -5,11 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\SuperClass;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OfferRepository")
  */
-class Offer
+class Offer extends SuperClass
 {
     /**
      * @ORM\Id()
