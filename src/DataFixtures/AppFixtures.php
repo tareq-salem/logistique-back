@@ -41,8 +41,8 @@ class AppFixtures extends Fixture
         $dateTime = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $admin = new User();
         $admin->setLogin('admin');
-        //$password = $this->encoder->encodePassword($admin, 'password');
         $admin->setPassword('password');
+        //$password = $this->encoder->encodePassword($admin, 'password');
 
         $manager->persist($admin);
         $manager->flush();
@@ -151,20 +151,20 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 10; $i++) {
             $dateTime = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
             $offer = new Offer();
-            $offer->setAvailability($availability[mt_rand(0, 1)]);
-            $offer->setBenefits($benefits[mt_rand(0, 10)]);
-            $offer->setContratType($contractType[mt_rand(0, 2)]);
-            $offer->setDescription($description[mt_rand(0, 10)]);
-            $offer->setDuration( $duration[mt_rand(0, 2)]);
-            $offer->setEndPublicationDate($dateTime);
-            $offer->setHourPerWeek($hourPerWeek[mt_rand(0, 2)]);
-            $offer->setIsActive(true);
-            $offer->setOfferType($offerType[mt_rand(0, 2)]);
-            $offer->setReference("referenceAdmin");
-            $offer->setRequiredExperience("experience");
-            $offer->setRequiredProfil($requiredProfil[mt_rand(0, 10)]);
-            $offer->setSalary($salary[mt_rand(0, 2)]);
-            $offer->setTitle($title[mt_rand(0, 2)]);
+            $offer->setAvailability($faker->numerify('# Mois'));
+            $offer->setBenefits($faker->text(200));
+            $offer->setContratType($faker->randomElement($randomContractType));
+            $offer->setDescription($faker->text(200));
+            $offer->setDuration($faker->numerify('## Mois'));
+            $offer->setEndPublicationDate($faker->DateTime('2019-02-28 13:46:23', 'Europe/Paris'));
+            $offer->setHourPerWeek($faker->numerify('## par semaine'));
+            $offer->setIsActive($faker->boolean);
+            $offer->setOfferType($faker->randomElement($randomOfferType));
+            $offer->setReference($faker->swiftBicNumber);
+            $offer->setRequiredExperience($faker->numerify("# ans"));
+            $offer->setRequiredProfil($faker->text($maxNbChars = 15));
+            $offer->setSalary($faker->numerify("#### €/mois"));
+            $offer->setTitle($faker->word);
             $offer->setStartPublicationDate($dateTime);
             $offer->setStatus($faker->randomElement($randomStatus));
             $randomOffers [] = $offer;

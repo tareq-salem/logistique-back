@@ -23,6 +23,7 @@ class CountryController extends AbstractController
 
         $countries = $countryRepository->findAll();
 
+
         if (empty($countries)){
             $countries = "Vous n'avez de valeur dans votre BDD";
        }
@@ -64,6 +65,10 @@ class CountryController extends AbstractController
         ]);
     }
 
+//show.html
+//http://127.0.0.1:8000/country/11
+//edit | delete
+//http://127.0.0.1:8000/admin/country/{11}/{edit | delete }
     /**
      * @Route("/{id}/edit", name="country_edit", methods={"GET","POST"})
      */

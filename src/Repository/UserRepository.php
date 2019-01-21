@@ -59,11 +59,13 @@ class UserRepository extends ServiceEntityRepository
      */
     public function createAdminFromCommand($login, $password){
 
+        $role [] =  "ROLE_ADMIN";
         $admin = new User();
         $adminLn = count($this->findAll());
         if($adminLn < 1) {
             $admin->setLogin($login);
             $admin->setPassword($this->passwordEncoder->encodePassword($admin, $password));
+            $admin->setRoles($role);
             $this->getEntityManager()->persist($admin);
             $this->getEntityManager()->flush();
         }else{
