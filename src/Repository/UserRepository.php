@@ -52,10 +52,14 @@ class UserRepository extends ServiceEntityRepository
     }
     */
 
+    /**
+     * Sauvegarde des données envoyées par la console `php bin/console app:admin-user`
+     * @param $login (string)
+     * @param $password
+     */
     public function createAdminFromCommand($login, $password){
 
         $admin = new User();
-
         $adminLn = count($this->findAll());
         if($adminLn < 1) {
             $admin->setLogin($login);
