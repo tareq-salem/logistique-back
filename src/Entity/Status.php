@@ -36,7 +36,7 @@ class Status extends SuperClass
 
     public function __construct()
     {
-        parent::__construct();
+        //parent::__construct();
         $this->offers = new ArrayCollection();
     }
 
