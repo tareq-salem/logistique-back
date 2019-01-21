@@ -1,5 +1,7 @@
 <?php
 
+// TOREMEMORY -- NE PAS PUSH
+
 namespace App\DataFixtures;
 
 use App\Entity\ContractType;
@@ -27,6 +29,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+
 //        $faker = Factory::create('fr_FR');
         //CREATION DE L'ADMIN
         $dateTime = new \DateTime();
@@ -34,8 +37,6 @@ class AppFixtures extends Fixture
         $admin->setLogin('admin');
         //$password = $this->encoder->encodePassword($admin, 'password');
         $admin->setPassword('password');
-        $admin->setCreatedAt($dateTime);
-        $admin->setModifiedAt($dateTime);
 
         $manager->persist($admin);
         $manager->flush();
@@ -161,6 +162,8 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 20; $i++) {
             $dateTime = new \DateTime();
             $offer = new Offer();
+            $offer->setCreatedAt($dateTime);
+            $offer->setModifiedAt($dateTime);
             $offer->setAvailability($availability[mt_rand(0, 1)]);
             $offer->setBenefits($benefits[mt_rand(0, 10)]);
             $offer->setContratType($contractType[mt_rand(0, 2)]);

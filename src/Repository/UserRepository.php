@@ -4,7 +4,9 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,8 +16,10 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class UserRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    private $passwordEncoder;
+    public function __construct(RegistryInterface $registry, UserPasswordEncoderInterface $passwordEncoder)
     {
+        $this->passwordEncoder = $passwordEncoder;
         parent::__construct($registry, User::class);
     }
 
@@ -47,4 +51,21 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function createAdminFromCommand($login, $password){
+
+        $admin = new User();
+
+        $adminLn = count($this->findAll());
+        if($adminLn < 1) {
+            $admin->setLogin($login);
+            $admin->setPassword($this->passwordEncoder->encodePassword($admin, $password));
+            $this->getEntityManager()->persist($admin);
+            $this->getEntityManager()->flush();
+        }else{
+            throw new \RuntimeException("Vous ne pouvez pas rajouter un user \n
+            pour remplacer l'utilisateur,  veuillez vous connecter à phpmyadmin et le supprimer\n
+            puis rejouez la commande");
+        }
+    }
 }
