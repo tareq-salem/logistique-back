@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\SuperClass;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OfferRepository")
  */
-class Offer
+class Offer extends SuperClass
 {
     /**
      * @ORM\Id()
@@ -80,6 +83,34 @@ class Offer
      * @ORM\Column(type="string", length=255)
      */
     private $benefits;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Status", inversedBy="offers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\OfferType", inversedBy="offers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $offerType;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ContractType", inversedBy="offers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $contratType;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\LocationOffer", mappedBy="offer", orphanRemoval=true)
+     */
+    private $locationOffers;
+
+    public function __construct()
+    {
+        $this->locationOffers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -238,6 +269,71 @@ class Offer
     public function setBenefits(string $benefits): self
     {
         $this->benefits = $benefits;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return Collection|LocationOffer[]
+     */
+    public function getLocationOffers(): Collection
+    {
+        return $this->locationOffers;
+    }
+
+    public function addLocationOffer(LocationOffer $locationOffer): self
+    {
+        if (!$this->locationOffers->contains($locationOffer)) {
+            $this->locationOffers[] = $locationOffer;
+            $locationOffer->setOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function getOfferType(): ?OfferType
+    {
+        return $this->offerType;
+    }
+
+    public function setOfferType(?OfferType $offerType): self
+    {
+        $this->offerType = $offerType;
+
+        return $this;
+    }
+
+    public function getContratType(): ?ContractType
+    {
+        return $this->contratType;
+    }
+
+    public function setContratType(?ContractType $contratType): self
+    {
+        $this->contratType = $contratType;
+        return $this;
+    }
+
+    public function removeLocationOffer(LocationOffer $locationOffer): self
+    {
+        if ($this->locationOffers->contains($locationOffer)) {
+            $this->locationOffers->removeElement($locationOffer);
+            // set the owning side to null (unless already changed)
+            if ($locationOffer->getOffer() === $this) {
+                $locationOffer->setOffer(null);
+            }
+        }
 
         return $this;
     }

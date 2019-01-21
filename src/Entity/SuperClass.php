@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\MappedSuperClass
  */
-
 class SuperClass
 {
 
@@ -20,6 +19,14 @@ class SuperClass
      * @ORM\Column(type="datetime")
      */
     private $modified_at;
+
+    public function __construct() {
+        $this->setModifiedAt(new \DateTime('now'));
+
+        if ($this->getCreatedAt() === null) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
+    }
     
 
     public function getCreatedAt(): ?\DateTimeInterface

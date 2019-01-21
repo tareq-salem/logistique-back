@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\SuperClass as SuperClass;
 
@@ -26,6 +28,17 @@ class OfferType extends SuperClass
      * @ORM\Column(type="boolean")
      */
     private $is_active;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="offerType")
+     */
+    private $offers;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->offers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -52,6 +65,37 @@ class OfferType extends SuperClass
     public function setIsActive(bool $is_active): self
     {
         $this->is_active = $is_active;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setOfferType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+            // set the owning side to null (unless already changed)
+            if ($offer->getOfferType() === $this) {
+                $offer->setOfferType(null);
+            }
+        }
 
         return $this;
     }
