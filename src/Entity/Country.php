@@ -31,7 +31,7 @@ use Doctrine\ORM\Mapping as ORM;
 
         public function __construct()
         {
-            parent::__construct();
+
             $this->locations = new ArrayCollection();
         }
 
