@@ -53,7 +53,7 @@ class Location extends SuperClass
 
     public function __construct()
     {
-        parent::__construct();
+
         $this->locationOffers = new ArrayCollection();
     }
 
