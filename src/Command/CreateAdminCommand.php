@@ -52,11 +52,11 @@ class CreateAdminCommand extends Command
                 $login,
                 $password
             );
-
-            $io->success(sprintf("Your login is ".
+            $io->success(sprintf("Your login : ".
                 $login.
-                "& your password "
+                " & your password : "
                 .$password));
+            $io->note("pour remplacer l'utilisateur,  veuillez vous connecter à phpmyadmin et le supprimer puis rejouez la commande\"");
 
         }else{
             throw new \RuntimeException("<options=bold>you password or your login is empty</>");
