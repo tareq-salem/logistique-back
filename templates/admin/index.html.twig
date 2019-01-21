@@ -16,5 +16,21 @@
         <li>Your controller at <code><a href="{{ '/Users/yassin/Documents/SYMPHONY/logistique-back/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
         <li>Your template at <code><a href="{{ '/Users/yassin/Documents/SYMPHONY/logistique-back/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
     </ul>
+
+    <ul>
+        <h2>Dernières offres</h2>
+        {% for offer in offers %}
+            <li>{{ offer.title }} {{ offer.id }}</li>
+        {% endfor %}
+    </ul>
+
+    <ul>
+        <h2>Dernières candidatures</h2>
+        {% for candidature in candidatures %}
+            <li>{{ candidature.id }}</li>
+        {% endfor %}
+    </ul>
+
+
 </div>
 {% endblock %}
