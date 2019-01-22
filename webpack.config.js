@@ -20,7 +20,9 @@ Encore
     .addStyleEntry('app', './assets/scss/app.scss')
     .addStyleEntry('template', './assets/scss/template.scss')
     .addStyleEntry('menu', './assets/scss/menu.scss')
+    .addStyleEntry('footer', './assets/scss/footer.scss')
     .addStyleEntry('accueil', './assets/scss/accueil.scss')
+    .addStyleEntry('carrieres', './assets/scss/carrieres.scss')
 
     //.addEntry('app', './assets/js/app.js')
     //.addEntry('page1', './assets/js/page1.js')

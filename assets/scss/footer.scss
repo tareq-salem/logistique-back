@@ -1,0 +1,58 @@
+@import 'template';
+
+footer section {
+    bottom: 0;
+    width: 20%;
+    padding: 15px 20px;
+}
+
+footer section a {
+    color: $color-third;
+}
+
+footer section a:hover {
+    color: $color-white;
+    text-decoration: none;
+}
+
+footer section:first-child {
+    margin-left: 10%;
+}
+
+footer section:last-child {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+footer section:nth-child(3) > a {
+    color: $color-white;
+    font-size: 35px;
+    padding-right: 5px;
+}
+
+footer h4 {
+    margin-bottom: 20px;
+    padding-left: 0;
+    color: $color-white;
+}
+
+footer ul {
+    position: relative;
+    padding: 0;
+    padding-left: 10px;
+    margin: 0;
+    list-style: none;
+}
+
+footer p {
+    margin: 0;
+    padding-left: 0;
+    color: $color-white;
+}
+
+footer a {
+    font-size: 16px;
+}
