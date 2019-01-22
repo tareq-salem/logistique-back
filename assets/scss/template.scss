@@ -1,0 +1,132 @@
+@import 'variables';
+
+/*############## TEXTE ##############*/
+
+%title-text {
+    font-family: $fontTitre;
+    color: $color-grey;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+h1 {
+    font-size: 64px;
+    @extend %title-text;
+}
+
+h2 {
+    font-size: 42px;
+    @extend %title-text;
+}
+
+h3 {
+    font-size: 32px;
+    @extend %title-text;
+}
+
+h4 {
+    font-size: 24px;
+    @extend %title-text;
+}
+
+h5 {
+    font-size: 18px;
+    @extend %title-text;
+}
+
+h6 {
+    font-size: 14px;
+    @extend %title-text;
+}
+
+p {
+    font-size: 16px;
+    font-family: $fontParagraphe;
+    padding: 10px;
+    color: $color-grey;
+}
+
+/*############## LIENS ##############*/
+
+a {
+    font-size: 16px;
+    font-family: $fontParagraphe;
+    text-decoration: none;
+    color: $color-third;
+    &:hover {
+        color: $color-third-3;
+        text-decoration: none;
+    }
+}
+
+/*############## BOUTONS ##############*/
+
+button {
+    padding: 8px 18px;
+    border: 1px solid $color-white;
+    border-radius: 3px;
+    text-decoration: none;
+    color: $color-white;
+    background-color: $color-third-3;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    &:hover {
+        border: 1px solid $color-third-3;
+        background-color: $color-white;
+        color: $color-third-3;
+    }
+}
+
+/*############## FORMULAIRES ##############*/
+
+input {
+    &[type=file] {
+        padding: 8px 18px;
+        border: 1px solid $color-white;
+        border-radius: 3px;
+        text-decoration: none;
+        color: $color-white;
+        background-color: $color-third-3;
+        -webkit-transition-duration: 0.4s;
+        transition-duration: 0.4s;
+        &:hover {
+            border: 1px solid $color-third-3;
+            background-color: $color-white;
+            color: $color-third-3;
+        }
+    }
+}
+
+label {
+    font-size: 16px;
+    font-family: $fontParagraphe;
+    color: $color-grey;
+}
+
+form {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+/*############## TABLEAUX ##############*/
+
+.tableau {
+    width: 1400px;
+    margin: auto;
+    thead {
+        color: $color-white;
+        background-color: $color-third-3;
+    }
+    button {
+        color: $color-white;
+        margin-right: 5px;
+        &:hover {
+            color: $color-white;
+        }
+        &:target {
+            color: $color-white;
+        }
+    }
+}
