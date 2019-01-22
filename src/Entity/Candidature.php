@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\SuperClass as SuperClass;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CandidatureRepository")
  */
-class Candidature
+class Candidature extends SuperClass
 {
     /**
      * @ORM\Id()
@@ -46,6 +47,11 @@ class Candidature
      * @ORM\JoinColumn(nullable=false)
      */
     private $candidate;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\LocationOffer", inversedBy="candidature")
+     */
+    private $locationOffer;
 
     public function getId(): ?int
     {
@@ -120,6 +126,18 @@ class Candidature
     public function setCandidate(?Candidate $candidate): self
     {
         $this->candidate = $candidate;
+
+        return $this;
+    }
+
+    public function getLocationOffer(): ?LocationOffer
+    {
+        return $this->locationOffer;
+    }
+
+    public function setLocationOffer(?LocationOffer $locationOffer): self
+    {
+        $this->locationOffer = $locationOffer;
 
         return $this;
     }
