@@ -3,5 +3,41 @@
 {% block title %}Page d'accueil{% endblock %}
 
 {% block body %}
-<h1>PAGE D'ACCUEIL</h1>
+<nav class="navbar navbar-expand-lg navbar-light navbar-center">
+            <div class="nav-container">
+                <a class="navbar-brand" href="main.html"><img src="assets/img/logo/Logo_logisticc_white.svg" height="50px"
+                    width="100px" alt=""></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="main.html" class="nav-link">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/presentation.html" class="nav-link">Présentation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/references.html" class="nav-link">Références</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="pages/carrieres.html" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Carrières
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="pages/carrieres/listeFront.html">Listes des offres</a>
+                            <a class="dropdown-item" href="pages/carrieres/candidature.html">Candidature spontanée</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/contact.html" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+                </div>
+            </div>
+          </nav>
+        
 {% endblock %}
