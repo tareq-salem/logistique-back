@@ -19,8 +19,10 @@ Encore
      */
     .addStyleEntry('app', './assets/scss/app.scss')
     .addStyleEntry('template', './assets/scss/template.scss')
-    .addStyleEntry('menu', './assets/scss/menu.scss')
-    .addStyleEntry('accueil', './assets/scss/accueil.scss')
+    .addStyleEntry('variables', './assets/scss/variables.scss')
+    .addStyleEntry('nav', './assets/scss/nav.scss')
+    .addStyleEntry('home', './assets/scss/home.scss')
+    .addStyleEntry('presentation', './assets/scss/presentation.scss')
 
     //.addEntry('app', './assets/js/app.js')
     //.addEntry('page1', './assets/js/page1.js')
