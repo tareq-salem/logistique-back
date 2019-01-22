@@ -1,0 +1,107 @@
+<?php
+
+namespace App\Controller\Admin;
+
+use App\Entity\Country;
+use App\Form\CountryType;
+use App\Repository\CountryRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * @Route("/country")
+ */
+class CountryController extends AbstractController
+{
+    /**
+     * @Route("/", name="country_index", methods={"GET"})
+     */
+    public function index(CountryRepository $countryRepository): Response
+    {
+
+        $countries = $countryRepository->findAll();
+
+
+        if (empty($countries)){
+            $countries = "Vous n'avez de valeur dans votre BDD";
+       }
+        return $this->render('country/index.html.twig', [
+            'countries' => $countries
+        ]);
+    }
+
+    /**
+     * @Route("/new", name="country_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
+    {
+        $country = new Country();
+        $form = $this->createForm(CountryType::class, $country);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($country);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('country_index');
+        }
+
+        return $this->render('country/new.html.twig', [
+            'country' => $country,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="country_show", methods={"GET"})
+     */
+    public function show(Country $country): Response
+    {
+        return $this->render('country/show.html.twig', [
+            'country' => $country,
+        ]);
+    }
+
+//show.html
+//http://127.0.0.1:8000/country/11
+//edit | delete
+//http://127.0.0.1:8000/admin/country/{11}/{edit | delete }
+    /**
+     * @Route("/{id}/edit", name="country_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Country $country): Response
+    {
+        $form = $this->createForm(CountryType::class, $country);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('country_index', [
+                'id' => $country->getId(),
+            ]);
+        }
+
+        return $this->render('country/edit.html.twig', [
+            'country' => $country,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="country_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Country $country): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$country->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($country);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('country_index');
+    }
+}
