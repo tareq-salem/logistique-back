@@ -14,6 +14,9 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class OfferRepository extends ServiceEntityRepository
 {
+
+    private $limit;
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Offer::class);
@@ -46,5 +49,37 @@ class OfferRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+
+
+    public function allIsActive(){
+        return $this->findBy(
+            ['is_active' => 1],
+            ['created_at' => 'DESC']
+        );
+    }
+*/
+
+    public function  findOneByIdSlug(string $slug){
+
+    }
+
+   /**
+     * Request all offer Active and order by descendant
+     * @param $limit
+     * @return Offer[]
+     */
+    public function findByLatestLimitedBy($limit = null){
+        $this->limit =  $limit;
+
+        if($limit === 0 || $limit === null){
+            $this->limit = null;
+        }
+
+        return $this->findBy(
+            ['is_active' => 1],
+            ['created_at' => 'DESC'],
+            $this->limit
+        );
+    }
+
 }

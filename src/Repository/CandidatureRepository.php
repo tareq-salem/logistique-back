@@ -47,4 +47,12 @@ class CandidatureRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findByLatestLimitedBy(int $limit){
+        return $this->findBy(
+            [],
+            ['created_at' => 'DESC'],
+            5
+        );
+    }
 }

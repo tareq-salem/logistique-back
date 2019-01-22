@@ -1,7 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ma Carriere{% endblock %}
+{% block title %}Carrières{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('menu')}}
+    {{ encore_entry_link_tags('footer')}}
+    {{ encore_entry_link_tags('carrieres')}}
+{% endblock %}
 
 {% block body %}
-<h1>PAGE CARRIERE</h1>
+
+    {#{{ include('includes/menu.html.twig') }}#}
+
+    <main>
+        <!-- CODE -->
+        <h1>Carrières</h1>
+        <section id="corpus">
+            <div class="lineText">
+                <img src="{{ asset('build/recrutement-1.jpg') }}" alt="">
+                <div id="paragraphe">
+                    <h2>Nos Valeurs</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+            <div class="lineText">
+                <div id="paragraphe">
+                    <h2>Les Avantages</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <img src="{{ asset('build/recrutement-2.jpg') }}" alt="">
+            </div>
+        </section>
+        <section id="button">
+            <h2>Découvrez vite nos offres !</h2>
+            <a href="{{ path('offres') }}"><button type="button" name="liste">Liste des offres</button></a>
+            <a href="{{ path('postuler') }}"><button type="button" name="candidature">Candidature spontanée</button></a>
+        </section>
+    </main>
+
+    {{ include('includes/footer.html.twig') }}
+
 {% endblock %}
