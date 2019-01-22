@@ -7,7 +7,7 @@ Encore
     .setPublicPath('/build')
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
-
+    .copyFiles({ from: './assets/images', pattern: /\.(svg|jpg|png|jpeg)$/})
     /*
      * ENTRY CONFIG
      *
@@ -17,7 +17,12 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
-    .addEntry('app', './assets/js/app.js')
+    .addStyleEntry('app', './assets/scss/app.scss')
+    .addStyleEntry('template', './assets/scss/template.scss')
+    .addStyleEntry('menu', './assets/scss/menu.scss')
+    .addStyleEntry('accueil', './assets/scss/accueil.scss')
+
+    //.addEntry('app', './assets/js/app.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -39,7 +44,7 @@ Encore
     .enableVersioning(Encore.isProduction())
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -50,6 +55,8 @@ Encore
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
+
+    .splitEntryChunks()
 ;
 
 module.exports = Encore.getWebpackConfig();

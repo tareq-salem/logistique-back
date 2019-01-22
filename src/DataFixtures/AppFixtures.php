@@ -1,5 +1,7 @@
 <?php
 
+// TOREMEMORY -- NE PAS PUSH
+
 namespace App\DataFixtures;
 
 use App\Entity\Candidate;
@@ -33,6 +35,8 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+
+//        $faker = Factory::create('fr_FR');
         //CREATION DE L'ADMIN
         $dateTime = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $admin = new User();
@@ -144,15 +148,18 @@ class AppFixtures extends Fixture
         // Faker table Offer
         $offer = null;
         $randomOffers = [];
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $dateTime = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
             $offer = new Offer();
+           // $offer->setCreatedAt($faker->DateTime( $dateTime, 'Europe/Paris'));
+
+            $offer->setCreatedAt($faker->dateTimeBetween('-6 months', 'Europe/Paris'));
             $offer->setAvailability($faker->numerify('# Mois'));
             $offer->setBenefits($faker->text(200));
             $offer->setContratType($faker->randomElement($randomContractType));
             $offer->setDescription($faker->text(200));
             $offer->setDuration($faker->numerify('## Mois'));
-            $offer->setEndPublicationDate($faker->DateTime('2019-02-28 13:46:23', 'Europe/Paris'));
+            $offer->setEndPublicationDate($faker->dateTimeBetween('-4 months', '+2 months'));
             $offer->setHourPerWeek($faker->numerify('## par semaine'));
             $offer->setIsActive($faker->boolean);
             $offer->setOfferType($faker->randomElement($randomOfferType));
@@ -161,7 +168,7 @@ class AppFixtures extends Fixture
             $offer->setRequiredProfil($faker->text($maxNbChars = 15));
             $offer->setSalary($faker->numerify("#### €/mois"));
             $offer->setTitle($faker->word);
-            $offer->setStartPublicationDate($dateTime);
+            $offer->setStartPublicationDate($faker->dateTimeBetween('-6 months', '+3 months'));
             $offer->setStatus($faker->randomElement($randomStatus));
             $randomOffers [] = $offer;
             $manager->persist($offer);
