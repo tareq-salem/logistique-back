@@ -12,7 +12,6 @@ class FullLocation
         $client = new Client(['headers' => ['User-Agent' => 'logisticc']]);
         $response = $client->request('GET', "https://nominatim.openstreetmap.org/search?format=json&q={$address}");
         $body = json_decode((string) $response->getBody());
-        var_dump($body);
         return $body;
     }
 }

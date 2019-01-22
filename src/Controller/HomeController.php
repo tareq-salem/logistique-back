@@ -14,10 +14,6 @@ class HomeController extends AbstractController
      */
     public function index(FullLocation $fullLocation, GeoLocation $geoLoc)
     {
-        $fullLocation->getFullLoc('293 rue des colchiques 01960 Peronnas');
-        
-        $geoLoc->geoLoc($fullLocation);
-        // var_dump($longlat);
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController'
         ]);
