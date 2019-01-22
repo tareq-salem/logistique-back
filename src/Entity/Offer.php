@@ -322,7 +322,7 @@ class Offer extends SuperClass
     public function setContratType(?ContractType $contratType): self
     {
         $this->contratType = $contratType;
-        return $this; 
+        return $this;
     }
 
     public function removeLocationOffer(LocationOffer $locationOffer): self

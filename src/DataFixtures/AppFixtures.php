@@ -1,5 +1,7 @@
 <?php
 
+// TOREMEMORY -- NE PAS PUSH
+
 namespace App\DataFixtures;
 
 use App\Entity\Candidate;
@@ -33,13 +35,15 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+
+//        $faker = Factory::create('fr_FR');
         //CREATION DE L'ADMIN
         $dateTime = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $admin = new User();
         $admin->setLogin('admin');
         $admin->setPassword('password');
         //$password = $this->encoder->encodePassword($admin, 'password');
-            
+
         $manager->persist($admin);
         $manager->flush();
 
