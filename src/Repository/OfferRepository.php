@@ -47,12 +47,18 @@ class OfferRepository extends ServiceEntityRepository
         ;
     }
     */
+    private $limit;
+    public function findByLatestLimitedBy($limit = null){
 
-    public function findByLatestLimitedBy(int $limit){
+        $this->limit = $limit;
+        if($limit === 0 || $limit === null){
+            $this->limit = null;
+        }
+
         return $this->findBy(
-            [],
+            ['is_active' => 0],
             ['created_at' => 'DESC'],
-            5
+            $this->limit
         );
     }
 

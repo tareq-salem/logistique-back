@@ -36,7 +36,7 @@ class AdminController extends AbstractController
 */
 
         $offers = $offerRepository->findByLatestLimitedBy(5);
-        $candidatures = $candidatureRepository->findByLatestLimitedBy(5);
+        $candidatures = $candidatureRepository->findByLatestLimitedBy(7);
 
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',

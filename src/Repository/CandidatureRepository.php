@@ -52,7 +52,7 @@ class CandidatureRepository extends ServiceEntityRepository
         return $this->findBy(
             [],
             ['created_at' => 'DESC'],
-            5
+            $limit
         );
     }
 }
