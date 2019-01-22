@@ -21,8 +21,10 @@ Encore
     .addStyleEntry('template', './assets/scss/template.scss')
     .addStyleEntry('variables', './assets/scss/variables.scss')
     .addStyleEntry('nav', './assets/scss/nav.scss')
+    .addStyleEntry('footer', './assets/scss/footer.scss')
     .addStyleEntry('home', './assets/scss/home.scss')
     .addStyleEntry('presentation', './assets/scss/presentation.scss')
+    .addStyleEntry('carrieres', './assets/scss/carrieres.scss')
 
     //.addEntry('app', './assets/js/app.js')
     //.addEntry('page1', './assets/js/page1.js')
