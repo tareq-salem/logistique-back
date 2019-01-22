@@ -19,6 +19,16 @@ class LocationOfferRepository extends ServiceEntityRepository
         parent::__construct($registry, LocationOffer::class);
     }
 
+    /**
+     * Requète qui va créer le slug de l'offre
+     * @return String $slug
+     */
+    public function createSlug() {
+        $URL_PREFIX = 'logisticc-recrute-';
+
+
+    }
+
     // /**
     //  * @return LocationOffer[] Returns an array of LocationOffer objects
     //  */

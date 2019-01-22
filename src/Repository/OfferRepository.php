@@ -19,6 +19,13 @@ class OfferRepository extends ServiceEntityRepository
         parent::__construct($registry, Offer::class);
     }
 
+    /**
+     * Renvoie l'offre correspondant au slug
+     */
+    public function findOne() {
+
+    }
+
     // /**
     //  * @return Offer[] Returns an array of Offer objects
     //  */

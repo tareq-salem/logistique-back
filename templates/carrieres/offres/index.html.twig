@@ -9,10 +9,11 @@
     <h1>LISTE DES OFFRES</h1>
     <ul>
         <h2> offres</h2>
-        {% for offer in offers %}
+        {% for offre in offres %}
             <li>
-                {{ offer.title }} -
-                {{ offer.id }} -
+                {{ offre.title }} -
+                {{ offre.id }} -
+                <p><a href="{{ path('offreDetail') }}">Voir l'offre</a></p>
                 {# TODO Postuler link #} <p><a href="">Postuler</a></p>
             </li>
         {% endfor %}
