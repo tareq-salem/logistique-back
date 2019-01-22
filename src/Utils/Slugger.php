@@ -16,5 +16,4 @@ class Slugger
         return $str;
     }
 
-    //logisticc-recrute-{titreOffre}-{typeContrat}-{typeOffre}-{codePostal}-{ville}
 }
