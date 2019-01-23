@@ -19,27 +19,16 @@ class AdminController extends AbstractController
     {
 
        // * @method Offer[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
-/*
-        $offers = $offerRepository->findBy([
-            ["created_at"],
-            ["ASC"],
-            5,
-            null
-            ]);
 
-        $candidatures = $candidatureRepository->findBy([
-            ["created_at"],
-            ["ASC"],
-            5,
-            null
-            ]);
-*/
-
-        $offers = $offerRepository->findByLatestLimitedBy(null);
+        //$offer1 = $offerRepository->findAllByDate();
+        $offers = $offerRepository->findByLatestLimitedBy(5);
+        //var_dump($offer1);
+        //var_dump($offers);
         $candidatures = $candidatureRepository->findByLatestLimitedBy(5);
 
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
+            //'offer1' => $offer1,
             'offers' => $offers,
             'candidatures' => $candidatures
         ]);

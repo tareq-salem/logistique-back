@@ -59,10 +59,41 @@ class OfferRepository extends ServiceEntityRepository
     }
 */
 
-    public function  findOneByIdSlug(string $slug){
+    /**
+     * @param string $slug
+     *
+    select *
+    from offer o
+    WHERE date(NOW()) > o.start_publication_date
+    AND date(now()) < o.end_publication_date
+    AND o.is_active = 1
+    ORDER BY o.created_at = 'DESC';
+     *
+     */
+    public function  findAllByDate() {
+        $requests =  $this->createQueryBuilder('o')
+            ->select('*')
+            ->where('o.start_publication_date < date(NOW())')
+            ->andWhere('o.end_publication_date > date(NOW())')
+            ->andWhere('o.is_active = 1')
+            ->orderBy('o.created_at','DESC')
+            ->getQuery()
+        ;
 
+        //var_dump($requests);
+        $requests =
+            $this->findBy(
+             ['start_publication_date' => '<  date(NOW()) '],
+             ['created_at' => 'DESC'],
+             5
+            );
+        return $requests;
     }
 
+
+    public function test(){
+
+    }
    /**
      * Request all offer Active and order by descendant
      * @param $limit
