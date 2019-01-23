@@ -1,36 +1,8 @@
-@import 'variables'; 
 @import 'template'; 
 
-// .navbar {
-//     background-color: #343a40; 
-// }
-
-// .navbar-center {
-//     position: fixed;
-//     top: 0; 
-//     left:0;
-//     right:0;
-//     z-index: 2; 
-// }
-
-// .nav-container {
-//     margin: 0 auto; 
-//     width: 100%;
-//     justify-content: space-between;
-
-//     a {
-//         color: $color-white !important; 
-//         font-size: 1.25rem; 
-//     }
-//     a:hover {
-//         color: $color-third !important;
-//     }
-// }
-
-
-// .nav-item {
-//     margin: 0 20px; 
-// }
+.bg-dark {
+    background-color: transparent !important; 
+}
 
 .carousel-inner {
 
@@ -97,14 +69,6 @@
 }
 
 @media (min-width: 992px){
-    .navbar {
-        background-color: transparent;  
-    }
-
-    .nav-container{
-        width: auto; 
-        display: flex; 
-    }
 
     .carousel-inner {
 

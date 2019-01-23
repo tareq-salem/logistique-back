@@ -1,4 +1,4 @@
-@import 'variables'; 
+@import 'template'; 
 
 .navbar {
     background-color: #343a40; 
@@ -26,7 +26,17 @@
     }
 }
 
-
 .nav-item {
     margin: 0 20px; 
 }
+
+@media (min-width: 992px){
+    .navbar {
+        background-color: transparent;  
+    }
+
+    .nav-container{
+        width: auto; 
+        display: flex; 
+    }
+}    
