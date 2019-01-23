@@ -19,6 +19,9 @@
 
 ###> IDEA
 /.idea
+
+.vscode
+
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/
@@ -32,3 +35,4 @@ yarn-error.log
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-pack ###
+
