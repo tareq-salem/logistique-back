@@ -33,7 +33,7 @@
          */
         public function offres()
         {
-            return $this->render('carrieres/offres/index.html.twig', [
+            return $this->render('carrieres/offer/index.html.twig', [
                 'controller_name' => 'CarrieresController',
             ]);
         }
