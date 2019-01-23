@@ -4,6 +4,7 @@
 logout:
     path: /logout
 
+
 admin:
   prefix: /admin # préfixe des URL
   name_prefix: admin_ # préfixe des noms de routes

@@ -18,6 +18,7 @@
         }
 
         /**
+         * candidature spontannee
          * @Route("/carrieres/postuler", name="postuler")
          */
         public function postuler()

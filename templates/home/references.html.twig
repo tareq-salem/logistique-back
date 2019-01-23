@@ -1,7 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page d'accueil{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('nav')}}    
+    {{ encore_entry_link_tags('references')}} 
+    {{ encore_entry_link_tags('footer')}}     
+{% endblock %}
 
 {% block body %}
-    <h1>PAGE REFERENCE</h1>
+
+    {% include 'home/nav.html.twig' %}
+
+    <main>
+        <section class="image">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h1>Références</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>                            
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Textes -->
+        <section class="text">
+            <p class="text-center">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet fermentum. Donec sed odio operae.</p>
+            <p class="text-center">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet fermentum. Donec sed odio operae.</p>
+            <p class="text-center">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet fermentum. Donec sed odio operae.</p>
+        </section>
+        <!-- Partenaires -->        
+        <div class="container mb-5">
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;">
+                <img src="https://www.afje.org/medias/partenaire/original/20151110-42422" alt="" class="img-thumbnail" style="width:256px; height:256px;margin:3px;">
+                <img src="http://www.cdc-biodiversite.fr/wp-content/uploads/2018/03/GRT-Gaz.jpg" alt="" class="img-thumbnail" style="width:256px; height:256px;margin:3px;">
+                <img src="https://cdn5.eslcompany.com/agency/assets/data/category/image/15123.svgz" alt="" class="img-thumbnail" style="width:256px; height:256px;margin:3px;">
+                <img src="http://www.3dinnov.fr/images/logos/logo_stratasys.png" alt="" class="img-thumbnail" style="width:256px; height:256px;margin:3px;">
+                <img src="https://pbs.twimg.com/profile_images/378800000788455510/168880a1fc70cc9a67fd50fcedf89544.jpeg" alt="" class="img-thumbnail" style="width:256px; height:256px;margin:10px 3px;">
+                <img src="https://lh3.googleusercontent.com/2Lgx12HW5EPOo1IFVv7_4ZYPK8mtz0zn3kKYYE6DiYoLCOVOoBMC4zpODAw5E7ctobu2w78_BeP22riaubmzXxuwBwtDOmOGeY8yJ-N_1MuztSM" alt="" class="img-thumbnail" style="width:256px; height:256px;margin:10px 3px;">
+                <img src="https://cdn5.eslcompany.com/agency/assets/data/category/image/11077.svg" alt="" class="img-thumbnail" style="width:256px; height:256px;margin:10px 3px;">
+                <img src="https://pbs.twimg.com/profile_images/710206666696957952/YKW9ZQUB_400x400.jpg" alt="" class="img-thumbnail" style="width:256px; height:256px;margin: 10px 3px;">
+            </div>
+        </div>
+    </main>
+
+    {% include 'includes/footer.html.twig' %}
+
 {% endblock %}

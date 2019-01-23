@@ -1,0 +1,21 @@
+@import "template";
+
+
+main {
+    margin-top: 76px;
+    padding: 50px 0;
+
+    .red{
+        color: $color-red;
+    }
+
+    .form-area{
+        background-color: #FAFAFA;
+        padding: 10px;
+    }
+
+    .container {
+        margin: 0 auto;
+        width: 30%;
+    }
+}

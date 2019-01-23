@@ -3,7 +3,8 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('nav')}}    
-    {{ encore_entry_link_tags('presentation')}}   
+    {{ encore_entry_link_tags('presentation')}} 
+    {{ encore_entry_link_tags('footer')}}     
 {% endblock %}
 
 {% block body %}
@@ -74,5 +75,7 @@
             </div>
         </section>
     </main>
+
+    {% include 'includes/footer.html.twig' %}
 
 {% endblock %}
