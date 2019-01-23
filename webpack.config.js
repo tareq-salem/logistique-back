@@ -29,6 +29,7 @@ Encore
     .addStyleEntry('contact', './assets/scss/contact.scss')
     .addStyleEntry('candidature', './assets/scss/candidature.scss')
     .addStyleEntry('login', './assets/scss/login.scss')
+    .addStyleEntry('dashboard', './assets/scss/dashboard.scss')
 
     //.addEntry('app', './assets/js/app.js')
     //.addEntry('page1', './assets/js/page1.js')
