@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\LocationOffer;
 use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -59,12 +60,6 @@ class OfferRepository extends ServiceEntityRepository
         ;
     }
 
-    public function allIsActive(){
-        return $this->findBy(
-            ['is_active' => 1],
-            ['created_at' => 'DESC']
-        );
-    }
 */
 
     /**
@@ -79,10 +74,37 @@ class OfferRepository extends ServiceEntityRepository
      *
      */
 
+    public function finOneBySlug($slug){
+
+        return $request = $this->createQueryBuilder('o')
+            ->join('o.location_id', 'l')
+            ->andWhere('l.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->addSelect('t')
+            ->getQuery()
+            ->getResult()
+            ;
+
+    }
+    public function search($term)
+    {
+        return $this->createQueryBuilder('cat')
+           /* ->andWhere('cat.id LIKE :searchTerm
+                OR cat.iconKey LIKE :searchTerm
+                OR fc.fortune LIKE :searchTerm')*/
+
+            ->andWhere('cat.location_id = :searchTerm')
+
+            ->leftJoin('cat.slug', 'fc')
+            ->setParameter('searchTerm', '%'.$term.'%')
+            ->getQuery()
+            ->execute();
+    }
+
+
     public function  findAllActualActive() {
        return $requests =  $this->createQueryBuilder('o')
-            ->where('o.is_active = 1')
-
+           ->where('o.is_active = 1')
             ->andWhere('o.start_publication_date < :beforenow')
             ->andWhere('o.end_publication_date > :afternow')
 
