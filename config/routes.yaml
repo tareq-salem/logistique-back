@@ -3,3 +3,10 @@
 #    controller: App\Controller\DefaultController::index
 logout:
     path: /logout
+
+
+admin:
+  prefix: /admin # préfixe des URL
+  name_prefix: admin_ # préfixe des noms de routes
+  resource: '../src/Controller/Admin' # Dossier concerné
+  type: annotation # Type de chargement des routes
