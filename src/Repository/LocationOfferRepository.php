@@ -20,25 +20,6 @@ class LocationOfferRepository extends ServiceEntityRepository
         parent::__construct($registry, LocationOffer::class);
     }
 
-    /**
-     * Requète qui va créer le slug de l'offre
-     * @return String $slug
-     */
-    public function createSlug(LocationOffer $locationOffer) {
-        $URL_PREFIX = 'logisticc-recrute-';
-
-        $TitreOffre = $locationOffer->getOffer()->getTitle();
-        $TypeDeContrat = $locationOffer->getOffer()->getContratType()->getName();
-        $TypeOffre = $locationOffer->getOffer()->getOfferType()->getName();
-        $CodePostal = $locationOffer->getLocation()->getPostalCode();
-        $Ville = $locationOffer->getLocation()->getCity();
-
-        $slug = $URL_PREFIX . $TitreOffre . $TypeDeContrat . $TypeOffre . $CodePostal . $Ville;
-        $slugger = new Slugger();
-        $slugger->slugify($slug);
-        return $slugger;
-    }
-
     // /**
     //  * @return LocationOffer[] Returns an array of LocationOffer objects
     //  */

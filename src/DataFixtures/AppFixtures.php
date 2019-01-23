@@ -185,7 +185,6 @@ class AppFixtures extends Fixture
             $locationOffer = new LocationOffer();
             $locationOffer->setLocation($faker->randomElement($randomLocations));
             $locationOffer->setOffer($faker->randomElement($randomOffers));
-            $locationOffer->setSlug($faker->slug(6));
             $randomLocationOffers [] = $locationOffer;
 
             $manager->persist($locationOffer);

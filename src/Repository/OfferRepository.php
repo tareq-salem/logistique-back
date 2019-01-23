@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\LocationOffer;
 use App\Entity\Offer;
+use App\Utils\Slugger;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -27,6 +29,32 @@ class OfferRepository extends ServiceEntityRepository
      */
     public function findOne() {
         //TODO
+    }
+
+    /**
+     * Requète qui va créer le slug de l'offre
+     * @return String $slug
+     */
+    public function createSlug(Offer $offer, Slugger $slugger, LocationOffer $locationOffer) {
+        $URL_PREFIX = 'logisticc-recrute-';
+
+        $TitreOffre = $offer->getTitle();
+        $TypeDeContrat = $offer->getContratType()->getName();
+        $TypeOffre = $offer->getOfferType()->getName();
+//        $locationOffers = $offer->getLocationOffers();
+//        $CodePostal = null;
+//        $Ville = null;
+//
+//        foreach ($locationOffers as $locationOffer)
+//        {
+//            $CodePostal = $locationOffer->getLocation()->getPostalCode();
+//            $Ville = $locationOffer->getLocation()->getCity();
+//        }
+
+        $slug = $URL_PREFIX . ' ' . $TitreOffre . ' ' . $TypeDeContrat . ' ' . $TypeOffre . ' ' . $CodePostal . ' ' . $Ville;
+        $slug = $slugger->slugify($slug);
+        
+        $locationOffer->setSlug($slug);
     }
 
     // /**
