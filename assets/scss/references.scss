@@ -1,0 +1,19 @@
+@import 'template';
+
+.masthead {
+    position: relative;
+    background-image: url('https://www.blackboard.com/images/223/PartnerIndex2_1920x1280_tcm223-70131.png');
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+  
+  @media (min-width: 768px) {
+    .masthead {
+      padding-top: 12rem;
+      padding-bottom: 12rem;
+    }
+    .masthead h1 {
+      font-size: 3rem;
+    }
+  }
+
