@@ -1,59 +1,65 @@
 @import 'template';
 
-h1, h2 {
-    text-align: center;
-}
+main {
 
-h1 {
-    margin-bottom: 50px;
-}
+    margin-top: 76px;
 
-h2 {
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-.lineText {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 450px;
-}
-
-#paragraphe {
-    width: 50%;
-    height: 100%;
-    padding: 50px;
-    background-color: $color-primary;
-    h2, p {
-        color: $color-white;
+    h1, h2 {
+        text-align: center;
     }
-}
 
-img {
-    height: 100%;
-    width: 50%;
-    object-fit: cover;
-}
+    h1 {
+        padding-top: 50px;
+        margin-bottom: 50px;
+    }
 
-#button {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 50px;
     h2 {
-        width: 100%;
+        margin-top: 30px;
+        margin-bottom: 30px;
     }
-}
 
-button {
-    margin: 10px;
-}
-
-@media (max-width: 768px) {
-    #paragraphe, img {
+    .lineText {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
         width: 100%;
+        height: 450px;
+    }
+
+    #paragraphe {
+        width: 50%;
+        height: 100%;
+        padding: 50px;
+        background-color: $color-primary;
+        h2, p {
+            color: $color-white;
+        }
+    }
+
+    img {
+        height: 100%;
+        width: 50%;
+        object-fit: cover;
+    }
+
+    #button {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 50px;
+        h2 {
+            width: 100%;
+        }
+    }
+
+    button {
+        margin: 10px;
+    }
+
+    @media (max-width: 768px) {
+        #paragraphe, img {
+            width: 100%;
+        }
     }
 }
