@@ -41,9 +41,10 @@ class AppFixtures extends Fixture
         $dateTime = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $admin = new User();
         $admin->setLogin('admin');
-        $admin->setPassword('password');
-        //$password = $this->encoder->encodePassword($admin, 'password');
-            
+        $password = $this->encoder->encodePassword($admin, 'password');
+        $admin->setPassword($password);
+        $admin->setRoles(["ROLE_ADMIN"]);
+
         $manager->persist($admin);
         $manager->flush();
 
