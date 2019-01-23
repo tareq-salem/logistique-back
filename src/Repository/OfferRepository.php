@@ -23,7 +23,7 @@ class OfferRepository extends ServiceEntityRepository
      * Renvoie l'offre correspondant au slug
      */
     public function findOne() {
-
+        //TODO
     }
 
     // /**
