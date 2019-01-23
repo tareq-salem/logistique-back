@@ -4,14 +4,14 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('menu')}}
+    {{ encore_entry_link_tags('nav')}}
     {{ encore_entry_link_tags('footer')}}
     {{ encore_entry_link_tags('carrieres')}}
 {% endblock %}
 
 {% block body %}
 
-    {#{{ include('includes/menu.html.twig') }}#}
+    {{ include('home/nav.html.twig') }}
 
     <main>
         <!-- CODE -->
