@@ -21,8 +21,8 @@ class OfferController extends AbstractController
      */
     public function index(OfferRepository $offerRepository): Response
     {
-        $offres = $offerRepository->findByLatestLimitedBy(5);
-
+        $offres = $offerRepository->findAllActualActive();
+        //var_dump($offres);
         return $this->render('carrieres/offer/index.html.twig', [
             'controller_name' => 'OfferController',
             'offres' => $offres

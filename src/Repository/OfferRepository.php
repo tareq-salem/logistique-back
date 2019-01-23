@@ -16,10 +16,12 @@ class OfferRepository extends ServiceEntityRepository
 {
 
     private $limit;
+    private $dateNow;
 
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Offer::class);
+        $this->dateNow = new \DateTime;
     }
 
     /**
@@ -76,24 +78,21 @@ class OfferRepository extends ServiceEntityRepository
     ORDER BY o.created_at = 'DESC';
      *
      */
-    public function  findAllByDate() {
-        $requests =  $this->createQueryBuilder('o')
-            ->select('*')
-            ->where('o.start_publication_date < date(NOW())')
-            ->andWhere('o.end_publication_date > date(NOW())')
-            ->andWhere('o.is_active = 1')
-            ->orderBy('o.created_at','DESC')
-            ->getQuery()
-        ;
 
-        //var_dump($requests);
-        $requests =
-            $this->findBy(
-             ['start_publication_date' => '<  date(NOW()) '],
-             ['created_at' => 'DESC'],
-             5
-            );
-        return $requests;
+    public function  findAllActualActive() {
+       return $requests =  $this->createQueryBuilder('o')
+            ->where('o.is_active = 1')
+
+            ->andWhere('o.start_publication_date < :beforenow')
+            ->andWhere('o.end_publication_date > :afternow')
+
+            ->setParameter("beforenow", $this->dateNow)
+            ->setParameter("afternow", $this->dateNow)
+
+            ->orderBy('o.created_at', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
 
@@ -113,7 +112,7 @@ class OfferRepository extends ServiceEntityRepository
         }
 
         return $this->findBy(
-            ['is_active' => 1],
+            [],
             ['created_at' => 'DESC'],
             $this->limit
         );

@@ -21,7 +21,7 @@ class AdminController extends AbstractController
        // * @method Offer[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
 
         //$offer1 = $offerRepository->findAllByDate();
-        $offers = $offerRepository->findByLatestLimitedBy(5);
+        $offers = $offerRepository->findAllActualActive(5);
         $candidatures = $candidatureRepository->findByLatestLimitedBy(5);
 
         return $this->render('admin/index.html.twig', [
@@ -31,6 +31,5 @@ class AdminController extends AbstractController
             'candidatures' => $candidatures
         ]);
     }
-
 
 }
