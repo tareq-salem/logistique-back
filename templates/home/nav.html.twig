@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light navbar-center bg-dark">
+    <div class="nav-container">
+        <a class="navbar-brand" href="{{ path('home') }}">
+            <img src="{{ asset('build/Logo_logisticc_white.svg') }}" height="50px" width="100px" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a href="{{ path('home') }}" class="nav-link">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('presentation') }}" class="nav-link">Présentation</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('references') }}" class="nav-link">Références</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('carrieres') }}" class="nav-link">Carrières</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('contact') }}" class="nav-link">Contact</a>
+            </li>
+        </ul>
+        </div>
+    </div>
+</nav>
