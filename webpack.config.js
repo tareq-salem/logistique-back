@@ -24,6 +24,7 @@ Encore
     .addStyleEntry('footer', './assets/scss/footer.scss')
     .addStyleEntry('home', './assets/scss/home.scss')
     .addStyleEntry('presentation', './assets/scss/presentation.scss')
+    .addStyleEntry('references', './assets/scss/references.scss')
     .addStyleEntry('carrieres', './assets/scss/carrieres.scss')
     .addStyleEntry('contact', './assets/scss/contact.scss')
     .addStyleEntry('candidature', './assets/scss/candidature.scss')

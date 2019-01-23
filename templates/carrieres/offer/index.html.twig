@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des offres{% endblock %}
+
+{% block body %}
+    {# TODO Candidature spontanée link #}
+    <p><a href="">Candidature spontanée</a></p>
+
+    <h1>LISTE DES OFFRES</h1>
+    <ul>
+        <h2> offres</h2>
+        {% for offre in offres %}
+            <li>
+                {{ offre.title }} -
+                {{ offre.id }} -
+                {# TODO voir l'offre link #}<p><a href="">Voir l'offre</a></p>
+                {# TODO Postuler link #}<p><a href="">Postuler</a></p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
