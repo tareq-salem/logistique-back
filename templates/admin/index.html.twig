@@ -1,37 +1,76 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dashboard')}}
+{% endblock %}
+
 {% block title %}Hello AdminController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<header>
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Logisticc</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Offres</a>
+                </li>
+                <li>
+                    <a href="#">Candidatures</a>
+                </li>
+                <li>
+                    <a href="#">Types</a>
+                </li>
+                <li>
+                    <a href="#">Status</a>
+                </li>
+                <li>
+                    <a href="#">Paramètres</a>
+                </li>
+            </ul>
+            <button>Déconnexion</button>
+        </nav>
+        {# <p><a href="{{ path('home') }}">home</a></p> #}
+    </div>
+</header>
+<main>
+    <div id="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="welcome">
+                        <h2>Welcome to Dashboard</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                    </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-    <p><a href="{{ path('logout') }}">Déconexion</a></p>
-    <p><a href="{{ path('home') }}">home</a></p>
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/yassin/Documents/SYMPHONY/logistique-back/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/yassin/Documents/SYMPHONY/logistique-back/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
-    </ul>
+                </div>
 
-    <ul>
-        <h2>Dernières offres</h2>
-        {% for offer in offers %}
-            <li>{{ offer.title }} {{ offer.id }}</li>
-        {% endfor %}
-    </ul>
+            </div>  
+        </div>
+    <section class= "card">
+        <h2 class="card-title">Dernières offres</h2>
+        <ul  class="list-group list-group-flush"> 
+            {% for offer in offers %}
+                <li class="list-group-item">{{ offer.title }} {{ offer.id }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+    <section class= "card">
+        <h2 class="card-title">Dernières candidatures</h2>    
+        <ul class="list-group list-group-flush"> 
+            {% for candidature in candidatures %}
+                <li class="list-group-item">{{ candidature.id }}</li>
+            {% endfor %}
+        </ul>
+    </section> 
 
-    <ul>
-        <h2>Dernières candidatures</h2>
-        {% for candidature in candidatures %}
-            <li>{{ candidature.id }}</li>
-        {% endfor %}
-    </ul>
-
-
-</div>
+</main>
+    {% include 'home/scripts.html.twig' %}
 {% endblock %}
