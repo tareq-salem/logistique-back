@@ -1,0 +1,29 @@
+@import 'template';
+
+.image {
+    background: linear-gradient(to bottom, rgba(55, 71, 79, 0.75), rgba(55, 71, 79, 0.75)), url('https://www.blackboard.com/images/223/PartnerIndex2_1920x1280_tcm223-70131.png') no-repeat center fixed;
+
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    color: white; 
+    text-align: left; 
+    padding-top: 400px; 
+    z-index: 10;
+
+    h1 { 
+        font-size: 3rem; 
+        color: $color-white; 
+        margin-bottom: 50px;         
+    }
+    
+    p { 
+        font-size: 20px;    
+        color: $color-white; 
+        margin-bottom: 50px; 
+    }
+}
+
+.text {
+  padding: 50px; 
+}
