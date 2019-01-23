@@ -10,56 +10,57 @@
 {% endblock %}
 
 {% block body %}
-{{ include('home/nav.html.twig') }}
 
-<main>
-    <section>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputEmail4">Titre de l'offre</label>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputPassword4">Type de contrat</label>
-            </div>
-        </div>
-        <div class="form-row">
+    {{ include('home/nav.html.twig') }}
+
+    <main>
+        <section>
+            <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputEmail4">Ville / Code Postal</label>
+                    <label for="inputEmail4">Titre de l'offre</label>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputPassword4">Pays</label>
+                    <label for="inputPassword4">Type de contrat</label>
                 </div>
             </div>
-    </section>
-    <form>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputEmail4">Objet</label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="Objet">
+            <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Ville / Code Postal</label>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Pays</label>
+                    </div>
+                </div>
+        </section>
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Objet</label>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Objet">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Email</label>
+                    <input type="password" class="form-control" id="inputPassword4" placeholder="Email">
+                </div>
             </div>
-            <div class="form-group col-md-6">
-                <label for="inputPassword4">Email</label>
-                <input type="password" class="form-control" id="inputPassword4" placeholder="Email">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Nom</label>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Nom">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Prénom</label>
+                    <input type="password" class="form-control" id="inputPassword4" placeholder="Prénom">
+                </div>
             </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputEmail4">Nom</label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="Nom">
+            <div class="form-row">
+                <textarea></textarea>
             </div>
-            <div class="form-group col-md-6">
-                <label for="inputPassword4">Prénom</label>
-                <input type="password" class="form-control" id="inputPassword4" placeholder="Prénom">
-            </div>
-        </div>
-        <div class="form-row">
-            <textarea></textarea>
-        </div>
 
+            <button type="submit">Postuler</button>
+        </form>
+    </main>
 
-        <button type="submit">Postuler</button>
-    </form>
-</main>
+    {{ include('includes/footer.html.twig') }}
 
-{{ include('includes/footer.html.twig') }}
 {% endblock %}

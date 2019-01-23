@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit OfferType{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Éditer le type d'offre</h1>
+        <div class="raw">
+            {{ include('admin/offer_type/_form.html.twig', {button: 'Sauvegarder'}) }}
+        </div>
+    </div>
+{% endblock %}

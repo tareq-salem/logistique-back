@@ -2,6 +2,13 @@
 
 {% block title %}Liste des offres{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('nav')}}    
+    {{ encore_entry_link_tags('listOffer')}} 
+    {{ encore_entry_link_tags('footer')}}     
+{% endblock %}
+
 {% block body %}
     {# TODO Candidature spontanée link #}
     <p><a href="">Candidature spontanée</a></p>
