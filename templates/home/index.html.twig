@@ -2,8 +2,8 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('nav')}}    
-    {{ encore_entry_link_tags('home')}}    
+    {{ encore_entry_link_tags('nav')}}
+    {{ encore_entry_link_tags('home')}}
 {% endblock %}
 
 {% block body %}
@@ -12,62 +12,62 @@
 
     <main>
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
+            <!-- <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-            </ol>
+            </ol> -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="overlay"></div>
                     <img class="d-block w-100 contain-img" src="https://www.cgi.com/sites/default/files/styles/hero_banner/public/transport-aviation.jpg?itok=vQVpW5Jn"
                         alt="First slide">
                     <div class="carousel-caption d-md-block contain-text">
-                        <h1>Accueil</h1>
+                        <h1>Logisticc</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <a href="#">En savoir plus</a>
+                        <a href="{{ path('presentation') }}"><button type="button">En savoir plus</button></a>
                     </div>
                 </div>
-                <div class="carousel-item">
+                <!-- <div class="carousel-item">
                     <div class="overlay"></div>
                     <img class="d-block w-100 contain-img" src="http://www.transportissimo.com/wp-content/uploads/2017/04/dachser-logistics-newsroom-press.jpg"
                         alt="Second slide">
                     <div class="carousel-caption d-md-block contain-text">
                         <h1>Présentation</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <a href="#">En savoir plus</a>
+                        <a href="#"><button type="button">En savoir plus</button></a>
                     </div>
-                </div>
+                </div> -->
                 <div class="carousel-item">
                     <div class="overlay"></div>
                     <img class="d-block w-100 contain-img" src="https://atlantedata.infodata-group.eu/wp-content/uploads/sites/4/2016/09/Container-port-photography_1920x1200.jpg"
-                        alt="Third slide">
+                        alt="Second slide">
                     <div class="carousel-caption d-md-block contain-text">
                         <h1>Références</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <a href="#">En savoir plus</a>
+                        <a href="{{ path('references') }}"><button type="button">En savoir plus</button></a>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="overlay"></div>
                     <img class="d-block w-100 contain-img" src="https://www.la-fonte-ardennaise.fr/sites/default/files/field/image/savoir-faire_logistique.jpg"
-                        alt="Forth slide">
+                        alt="Third slide">
                     <div class="carousel-caption d-md-block contain-text">
                         <h1>Carrières</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <a href="#">En savoir plus</a>
+                        <a href="{{ path('carrieres') }}"><button type="button">Voir nos offres</button></a>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="overlay"></div>
                     <img class="d-block w-100 contain-img" src="https://www.ing.be/Assets/nuid/images/1920/logistics-sector-1920.jpg"
-                        alt="Fifth slide">
+                        alt="Forth slide">
                     <div class="carousel-caption d-md-block contain-text">
                         <h1>Contact</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <a href="#">En savoir plus</a>
+                        <a href="{{ path('contact') }}"><button type="button">Nous contacter</button></a>
                     </div>
                 </div>
             </div>
@@ -85,5 +85,5 @@
     {% include 'home/scripts.html.twig' %}
 
     </body>
-        
+
 {% endblock %}
