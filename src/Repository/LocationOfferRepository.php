@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\LocationOffer;
+use App\Utils\Slugger;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -17,6 +18,25 @@ class LocationOfferRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, LocationOffer::class);
+    }
+
+    /**
+     * Requète qui va créer le slug de l'offre
+     * @return String $slug
+     */
+    public function createSlug(LocationOffer $locationOffer) {
+        $URL_PREFIX = 'logisticc-recrute-';
+
+        $TitreOffre = $locationOffer->getOffer()->getTitle();
+        $TypeDeContrat = $locationOffer->getOffer()->getContratType()->getName();
+        $TypeOffre = $locationOffer->getOffer()->getOfferType()->getName();
+        $CodePostal = $locationOffer->getLocation()->getPostalCode();
+        $Ville = $locationOffer->getLocation()->getCity();
+
+        $slug = $URL_PREFIX . $TitreOffre . $TypeDeContrat . $TypeOffre . $CodePostal . $Ville;
+        $slugger = new Slugger();
+        $slugger->slugify($slug);
+        return $slugger;
     }
 
     // /**

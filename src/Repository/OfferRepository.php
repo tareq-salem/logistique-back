@@ -22,6 +22,13 @@ class OfferRepository extends ServiceEntityRepository
         parent::__construct($registry, Offer::class);
     }
 
+    /**
+     * Renvoie l'offre correspondant au slug
+     */
+    public function findOne() {
+        //TODO
+    }
+
     // /**
     //  * @return Offer[] Returns an array of Offer objects
     //  */
@@ -49,7 +56,6 @@ class OfferRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-
 
     public function allIsActive(){
         return $this->findBy(
@@ -112,5 +118,4 @@ class OfferRepository extends ServiceEntityRepository
             $this->limit
         );
     }
-
 }
