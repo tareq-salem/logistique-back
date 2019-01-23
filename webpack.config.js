@@ -26,6 +26,7 @@ Encore
     .addStyleEntry('presentation', './assets/scss/presentation.scss')
     .addStyleEntry('carrieres', './assets/scss/carrieres.scss')
     .addStyleEntry('contact', './assets/scss/contact.scss')
+    .addStyleEntry('candidature', './assets/scss/candidature.scss')
 
     //.addEntry('app', './assets/js/app.js')
     //.addEntry('page1', './assets/js/page1.js')
