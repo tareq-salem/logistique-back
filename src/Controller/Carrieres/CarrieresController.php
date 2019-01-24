@@ -80,26 +80,6 @@
             ]);
         }
 
-
-        public function createAdminFromCommand($login, $password){
-
-            $role [] =  "ROLE_ADMIN";
-            $admin = new User();
-            $adminLn = count($this->findAll());
-            if($adminLn < 1) {
-                $admin->setLogin($login);
-                $admin->setPassword($this->passwordEncoder->encodePassword($admin, $password));
-                $admin->setRoles($role);
-                $this->getEntityManager()->persist($admin);
-                $this->getEntityManager()->flush();
-            }else{
-                throw new \RuntimeException("Vous ne pouvez pas rajouter un user \n
-            pour remplacer l'utilisateur,  veuillez vous connecter à phpmyadmin et le supprimer\n
-            puis rejouez la commande");
-            }
-        }
-
-
         /**
          * @Route("/carrieres/offres", name="offres")
          */
