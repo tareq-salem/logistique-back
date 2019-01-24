@@ -3,6 +3,7 @@
 namespace App\Controller\Carrieres;
 
 use App\Entity\Offer;
+use App\Entity\LocationOffer;
 use App\Form\OfferType;
 use App\Repository\LocationOfferRepository;
 use App\Repository\OfferRepository;
@@ -32,8 +33,9 @@ class OfferController extends AbstractController
     /**
      * @Route("/{slug}", name="offreDetail", methods={"GET"})
      */
-    public function show(Offer $offer): Response
+    public function show(LocationOffer $locationOffer): Response
     {
+        $offer = $locationOffer->getOffer();
         return $this->render('carrieres/offer/show.html.twig', [
             'offer' => $offer,
         ]);

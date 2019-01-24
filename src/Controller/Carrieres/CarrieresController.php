@@ -9,6 +9,7 @@
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
+    use Symfony\Component\HttpFoundation\Request;
 
     class CarrieresController extends AbstractController
     {
@@ -28,12 +29,11 @@
          */
         public function postuler(Request $request)
         {
-
+                // Enregistrement des entités, liaison candidature/candidat, upload des fichiers...
+                // Utilisation des repository concernés
+                // Logique création candidature & candidat
             $form = $this->createForm(PostulerType::class);
-
-
             $form->handleRequest($request);
-
             if ($form->isSubmitted() && $form->isValid()) {
                 $this->getDoctrine()->getManager()->flush();
 
@@ -42,13 +42,9 @@
                 return $this->redirectToRoute('postuler');
                 */
             }
-
-                //enregstrer des donnés du fomr
-                //->flush
             return $this->render('carrieres/postuler/index.html.twig', [
                 'controller_name' => 'CarrieresController',
                 'form' => $form->createView(),
-
             ]);
         }
 

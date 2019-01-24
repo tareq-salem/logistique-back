@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit ContractType{% endblock %}
+{% block title %}Éditer le type de contrat{% endblock %}
 
 {% block body %}
-    <h1>Edit ContractType</h1>
+    <div class="container mt-4">
+    <h1>Éditer le type de contrat</h1>
+        <div class="raw">
+         {{ include('admin/contract_type/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+        </div>
+    </div>
 
-    {{ include('admin/contract_type/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('contract_type_index') }}">back to list</a>
-
-    {{ include('admin/contract_type/_delete_form.html.twig') }}
 {% endblock %}
