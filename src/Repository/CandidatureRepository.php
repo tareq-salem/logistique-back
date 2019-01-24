@@ -63,15 +63,15 @@ class CandidatureRepository extends ServiceEntityRepository
     public function insertNewCandidature($lm,$cv,$message,$candidate) {
         $candidature = new Candidature();
 
-        $candidature->setMessage($message);
         $candidature->setCoverLetter($cv);
         $candidature->setResume($lm);
+        $candidature->setMessage($message);
 
         $candidature->setIsActive(true);
         $candidature->setCandidate($candidate);
         $candidature->setSubmitDate($this->now);
 
-        return$candidate;
+        return $candidature;
 
         // /!\  le flush() se fait dans la fonction d'appel : avec une injection de dépendance EntityManagerInterface $em ($em->flush)
 

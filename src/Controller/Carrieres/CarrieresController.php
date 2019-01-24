@@ -50,26 +50,28 @@
                     $postuler['email']
                 );
 
-                $em->persist($candidate);
+
                 $candidature = $candidatureRepository->insertNewCandidature(
                     $postuler['message'],
                     $postuler['cv'],
                     $postuler['lm'],
                     $candidate
                 );
-
+                var_dump($candidate, $candidature);
+                $em->persist($candidate);
                 $em->persist($candidature);
 
                 // ... perform some action, such as saving the task to the database
                 // for example, if Task is a Doctrine entity, save it!
-                $em->flush();
+
                 $this->addFlash('success',
                     $postuler['firstname']. ' '.$postuler['lastname']. ' '.'Candidature envoyé créée!!');
 
                 $this->getDoctrine()->getManager()->flush();
+                //$em->flush();
 
                 //Retourner un message de Bon sumit
-                return $this->redirectToRoute('postuler');
+                return $this->redirectToRoute('offres');
 
             }
             return $this->render('carrieres/postuler/index.html.twig', [
