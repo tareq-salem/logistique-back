@@ -20,7 +20,7 @@
                     <a href="#">Dashboard</a>
                 </li>
                 <li>
-                    <a href="#">Offres</a>
+                    <a href="{{ path('admin_offer_index' )}}">Offres</a>
                 </li>
                 <li>
                     <a href="#">Candidatures</a>
@@ -35,7 +35,11 @@
                     <a href="#">Paramètres</a>
                 </li>
             </ul>
-            <button>Déconnexion</button>
+            <ul class="navbar-nav ">
+                  <li class="nav-item">
+                      <a href=" {{ path('home')}}" class="nav-link">Deconnexion</a>
+                  </li>
+              </ul>
         </nav>
         {# <p><a href="{{ path('home') }}">home</a></p> #}
     </div>

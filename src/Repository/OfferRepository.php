@@ -113,9 +113,18 @@ class OfferRepository extends ServiceEntityRepository
         }
 
         return $this->findBy(
-            ['is_active' => 1],
+            [],
             ['created_at' => 'DESC'],
             $this->limit
         );
+    
     }
+    /**
+     *  @return 
+     */
+    public function findAllVisible(){
+
+        return $this->findByLatestLimitedBy();
+    }
+
 }

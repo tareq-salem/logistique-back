@@ -1,4 +1,4 @@
-@import 'variables';
+@import 'template';
 /*
     DEMO STYLE
 */
@@ -37,6 +37,7 @@ a:focus {
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
+
 #dashboard{
   text-decoration: none;
   transition: all 0.3s;
@@ -58,11 +59,13 @@ background-color:$color-third-2;
   
   #sidebar {
     min-width: 13%;
-    position: absolute;
-    height: 100%;
+    // position: absolute;
+    height: 100vh;
     background: $color-primary;
     color: #fff;
     transition: all 0.3s;
+    position: fixed;
+
   }
   
   #sidebar a,

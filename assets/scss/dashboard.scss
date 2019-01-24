@@ -52,6 +52,8 @@ a:focus {
     SIDEBAR STYLE
 ----------------------------------------------------- */
 
+
+
 .wrapper {
   display: flex;
   align-items: stretch;
@@ -60,11 +62,12 @@ a:focus {
 #sidebar {
   min-width: 13%;
   // max-width: 250px;
-  position: absolute;
-  height: 100%;
+  // position: absolute;
+  height: 100vh;
   background: $color-primary;
   color: #fff;
   transition: all 0.3s;
+  position: fixed;
 }
 
 #sidebar a,

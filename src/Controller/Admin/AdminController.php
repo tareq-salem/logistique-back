@@ -30,7 +30,4 @@ class AdminController extends AbstractController
             'offers' => $offers,
             'candidatures' => $candidatures
         ]);
-    }
-
-
-}
+    }}
