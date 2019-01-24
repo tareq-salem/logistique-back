@@ -1,4 +1,4 @@
-@import 'variables'; 
+@import 'template'; 
 
 main {
     padding-top: 125px; 
@@ -11,9 +11,8 @@ main {
         max-width: 610px;
         margin: auto;
         padding: 20px;
-        background-color: lightgray; 
-        border-radius: 10px; 
-        
+        background-color: #343a40; 
+        border-radius: 0.25rem; 
     }
 
     label {
@@ -21,7 +20,7 @@ main {
     }
 
     .textarea {
-        height: 150px; 
+        height: 200px; 
     }
 
     button {

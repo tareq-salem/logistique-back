@@ -48,7 +48,6 @@
                 var_dump($postuler);
                 //$candidate->setFirstname($p)
 
-
                 $candidate->setFirstname($postuler['firstname']);
                 $candidate->setLastname($postuler['lastname']);
                 $candidate->setEmail($postuler['firstname']);
@@ -67,16 +66,11 @@
 
                 $em->persist($candidature);
 
-
-
-
                 // ... perform some action, such as saving the task to the database
                 // for example, if Task is a Doctrine entity, save it!
                 $em->flush();
                 $this->addFlash('success',
                     $postuler['firstname']. ' '.$postuler['lastname']. ' '.'Candidature envoyé créée!!');
-
-
 
                 $this->getDoctrine()->getManager()->flush();
 
