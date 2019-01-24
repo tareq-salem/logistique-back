@@ -10,9 +10,7 @@
 {% endblock %}
 
 {% block body %}
-
     {{ include('home/nav.html.twig') }}
-
     <main>
         <section>
             <div class="form-row">
@@ -32,48 +30,34 @@
                     </div>
                 </div>
         </section>
-        
+
+        {########## FORMULAIRE ##########}
+        {{ form_start(form) }}
         <form>
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">Objet</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Objet">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputPassword4">Email</label>
-                    <input type="password" class="form-control" id="inputPassword4" placeholder="Email">
+                <div class="form-group col-md-12">
+                    <div class="col">{{ form_row(form.email) }}</div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputEmail4">Nom</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Nom">
+                    <div class="col">{{ form_row(form.lastname) }}</div>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputPassword4">Prénom</label>
-                    <input type="password" class="form-control" id="inputPassword4" placeholder="Prénom">
+                    <div class="col">{{ form_row(form.firstname) }}</div>
                 </div>
-            </div>    
-            <div class="form-row">    
-                <div class="form-group col-md-12">
-                    <div class="form-group">
-                        <label for="exampleFormControlFile1">Curriculum Vitae</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
-                </div>
-                <div class="form-group col-md-12">
-                    <div class="form-group">
-                        <label for="exampleFormControlFile1">Lettre de motivation</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
-                </div>
+            </div>
+            <div class="row">
+                <div class="col md-6">{{ form_row(form.cv) }}</div>
+                <div class="col md-6">{{ form_row(form.lm) }}</div>
             </div>
             <div class="form-row">
-                <textarea></textarea>
+                <div class="col">{{ form_row(form.message) }}</div>
             </div>
-
-            <button type="submit">Postuler</button>
+        {{ form_rest(form) }}
+            <button type="submit">{{ button|default('Postuler') }}</button>
         </form>
+        {{ form_end(form) }}
     </main>
 
     {{ include('includes/footer.html.twig') }}
