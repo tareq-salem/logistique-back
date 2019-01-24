@@ -28,11 +28,12 @@ Encore
     .addStyleEntry('presentation', './assets/scss/presentation.scss')
     .addStyleEntry('references', './assets/scss/references.scss')
     .addStyleEntry('carrieres', './assets/scss/carrieres.scss')
-    .addStyleEntry('listOffer', './assets/scss/listOffer.scss')
+    //.addStyleEntry('listOffer', './assets/scss/listOffer.scss')
     .addStyleEntry('contact', './assets/scss/contact.scss')
     .addStyleEntry('candidature', './assets/scss/candidature.scss')
     .addStyleEntry('login', './assets/scss/login.scss')
     .addStyleEntry('dashboard', './assets/scss/dashboard.scss')
+    .addStyleEntry('admin_offer', './assets/scss/admin_offer.scss')
     .addStyleEntry('detail', './assets/scss/detail.scss')
 
     //.addEntry('app', './assets/js/app.js')

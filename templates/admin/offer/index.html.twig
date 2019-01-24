@@ -1,63 +1,97 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Offer index{% endblock %}
-
+{% block stylesheets %}
+{{ parent() }}
+{{ encore_entry_link_tags('admin_offer')}}
+{% endblock %}
 {% block body %}
-    <h1>Offer index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Created_at</th>
-                <th>Modified_at</th>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Reference</th>
-                <th>Is_active</th>
-                <th>End_publication_date</th>
-                <th>Start_publication_date</th>
-                <th>Salary</th>
-                <th>Description</th>
-                <th>Duration</th>
-                <th>Hour_per_week</th>
-                <th>Availability</th>
-                <th>Required_profil</th>
-                <th>Required_experience</th>
-                <th>Benefits</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for offer in offers %}
-            <tr>
-                <td>{{ offer.createdAt ? offer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ offer.modifiedAt ? offer.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ offer.id }}</td>
-                <td>{{ offer.title }}</td>
-                <td>{{ offer.reference }}</td>
-                <td>{{ offer.isActive ? 'Yes' : 'No' }}</td>
-                <td>{{ offer.endPublicationDate ? offer.endPublicationDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ offer.startPublicationDate ? offer.startPublicationDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ offer.salary }}</td>
-                <td>{{ offer.description }}</td>
-                <td>{{ offer.duration }}</td>
-                <td>{{ offer.hourPerWeek }}</td>
-                <td>{{ offer.availability }}</td>
-                <td>{{ offer.requiredProfil }}</td>
-                <td>{{ offer.requiredExperience }}</td>
-                <td>{{ offer.benefits }}</td>
-                {#<td>#}
-                    {#<a href="{{ path('admin_offer_show', {'id': offer.id}) }}">show</a>#}
-                    {#<a href="{{ path('admin_offer_edit', {'id': offer.id}) }}">edit</a>#}
-                {#</td>#}
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="17">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('admin_offer_new') }}">Create new</a>
+    <header>
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+              <div class="sidebar-header">
+                <h3>Logisticc</h3>
+              </div>
+              <ul class="list-unstyled components">
+                <a id="dashboard" href="{{path('admin')}}">Dashboard</a>
+                <li>
+                    <p>Offres</p>
+                </li>
+                <li>
+                  <a href="#">Candidatures</a>
+                </li>
+                <li>
+                  <a href="#">Types</a>
+                </li>
+                <li>
+                  <a href="#">Status</a>
+                </li>
+                <li>
+                  <a href="#">Paramètres</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav ">
+                  <li class="nav-item">
+                      <a href="{{ path('home') }}" class="nav-link">Deconnexion</a>
+                  </li>
+              </ul>
+            </nav>
+    </header>
+            <main>
+              <div class="card">
+                    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Liste des offres</h3>
+                <span class="table-add float-right "><a href="{{ path('admin_offer_new') }}" class="text-success"><i class="fas fa-plus fa-2x" 
+                aria-hidden="true" style="display: flex;align-items: flex-end;justify-content: flex-end;margin-right: 20px;margin-top: 10px;"></i></a></span>
+                <div class="card-body">
+                    <table class="table table-bordered table-responsive-md table-striped text-center">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Intitulé
+                                </th>
+                                <th>
+                                    Référence
+                                </th>
+                                <th style="width: 50%">
+                                    Description
+                                </th>
+                                <th>
+                                    date de creation
+                                </th>
+                                <th>
+                                    Active
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for offer in offers %}
+                            <tr>
+                                <td>{{ offer.title }}</td>
+                                <td>{{ offer.reference }}</td>
+                                <td>{{ offer.description }}</td>
+                                <td>{{ offer.createdAt ? offer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ offer.isActive ? 'Yes' : 'No' }}</td>
+                                <td>
+                                    <button type="text" name="edit" class="btn btn-warning"><i class="fas fa-edit"></i></button>  
+                                    <button type="text" name="delete" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                            {% if offer == null %}
+                             <tr>
+                                <td colspan="17">no records found</td>
+                            </tr>
+                            {% endif %}
+        
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="pagination">
+                        {{ knp_pagination_render(offers) }}
+                    </div>
+                </div>
+            </div>
+            </main>
+     
 {% endblock %}

@@ -28,4 +28,8 @@ services:
     # please note that last definitions always *replace* previous ones
     App\EventListener\AddDateTimeSubscriber:
         tags:
-            - { name: doctrine.event_subscriber }
+            - { name: 'doctrine.event_subscriber' }
+
+    App\EventListener\CreateSlugSubscriber:
+        tags:
+            - { name: 'doctrine.event_subscriber' }
