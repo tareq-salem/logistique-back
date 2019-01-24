@@ -2,10 +2,13 @@
 
     namespace App\Controller\Carrieres;
 
+    use App\Entity\Candidate;
+    use App\Entity\Candidature;
     use App\Entity\LocationOffer;
     use App\Entity\Offer;
     use App\Form\PostulerType;
     use Doctrine\ORM\EntityManager;
+    use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
@@ -27,27 +30,84 @@
          * candidature spontannee
          * @Route("/carrieres/postuler", name="postuler")
          */
-        public function postuler(Request $request)
+        public function postuler(Request $request, EntityManagerInterface $em)
         {
-                // Enregistrement des entités, liaison candidature/candidat, upload des fichiers...
-                // Utilisation des repository concernés
-                // Logique création candidature & candidat
+
+            $now = new \DateTime();
+            $candidature = new Candidature();
+            $candidate = new Candidate();
+            // Enregistrement des entités, liaison candidature/candidat, upload des fichiers...
+            // Utilisation des repository concernés
+            // Logique création candidature & candidat
             $form = $this->createForm(PostulerType::class);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+                $postuler = $form->getData();
+
+                var_dump($postuler);
+                //$candidate->setFirstname($p)
+
+
+                $candidate->setFirstname($postuler['firstname']);
+                $candidate->setLastname($postuler['lastname']);
+                $candidate->setEmail($postuler['firstname']);
+                $em->persist($candidature);
+
+                //$candidature->setCandidate();
+                $candidature->setMessage($postuler['message']);
+                $candidature->setCoverLetter($postuler['cv']);
+                $candidature->setResume($postuler['lm']);
+
+                $candidature->setIsActive(1);
+                $candidature->setSubmitDate($now);
+
+                var_dump($candidate, $candidature);
+
+                $em->persist($candidate);
+
+
+
+
+                // ... perform some action, such as saving the task to the database
+                // for example, if Task is a Doctrine entity, save it!
+                $em->flush();
+                $this->addFlash('success',
+                    $postuler['firstname']. ' '.$postuler['lastname']. ' '.'Candidature envoyé créée!!');
+
+
+
                 $this->getDoctrine()->getManager()->flush();
 
-                /*
-                 * Retourner un message de Bon sumit
+                //Retourner un message de Bon sumit
                 return $this->redirectToRoute('postuler');
-                */
+
             }
             return $this->render('carrieres/postuler/index.html.twig', [
                 'controller_name' => 'CarrieresController',
                 'form' => $form->createView(),
             ]);
         }
+
+
+        public function createAdminFromCommand($login, $password){
+
+            $role [] =  "ROLE_ADMIN";
+            $admin = new User();
+            $adminLn = count($this->findAll());
+            if($adminLn < 1) {
+                $admin->setLogin($login);
+                $admin->setPassword($this->passwordEncoder->encodePassword($admin, $password));
+                $admin->setRoles($role);
+                $this->getEntityManager()->persist($admin);
+                $this->getEntityManager()->flush();
+            }else{
+                throw new \RuntimeException("Vous ne pouvez pas rajouter un user \n
+            pour remplacer l'utilisateur,  veuillez vous connecter à phpmyadmin et le supprimer\n
+            puis rejouez la commande");
+            }
+        }
+
 
         /**
          * @Route("/carrieres/offres", name="offres")
