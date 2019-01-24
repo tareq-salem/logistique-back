@@ -3,6 +3,7 @@
 namespace App\Controller\Carrieres;
 
 use App\Entity\Offer;
+use App\Entity\LocationOffer;
 use App\Form\OfferType;
 use App\Repository\LocationOfferRepository;
 use App\Repository\OfferRepository;
@@ -21,8 +22,8 @@ class OfferController extends AbstractController
      */
     public function index(OfferRepository $offerRepository): Response
     {
-        $offres = $offerRepository->findByLatestLimitedBy(5);
-
+        $offres = $offerRepository->findAllActualActive();
+        //var_dump($offres);
         return $this->render('carrieres/offer/index.html.twig', [
             'controller_name' => 'OfferController',
             'offres' => $offres
@@ -32,8 +33,9 @@ class OfferController extends AbstractController
     /**
      * @Route("/{slug}", name="offreDetail", methods={"GET"})
      */
-    public function show(Offer $offer): Response
+    public function show(LocationOffer $locationOffer): Response
     {
+        $offer = $locationOffer->getOffer();
         return $this->render('carrieres/offer/show.html.twig', [
             'offer' => $offer,
         ]);

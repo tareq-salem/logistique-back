@@ -3,9 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\LocationOffer;
+use App\Entity\Offer;
 use App\Utils\Slugger;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method LocationOffer|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,9 +18,13 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class LocationOfferRepository extends ServiceEntityRepository
 {
+    private $offer;
+    private $location;
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, LocationOffer::class);
+        $this->offer = Offer::class;
+        $this->location = LocationRepository::class;
     }
 
     // /**

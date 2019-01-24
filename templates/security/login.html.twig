@@ -1,22 +1,44 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('login')}}
+{% endblock %}
+
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin">
+          <div class="card-body">
+            <h5 class="card-title text-center">Se connecter</h5>
+            <form class="form-signin" method="post">
+                {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+              <div class="form-label-group">
+                <input type="text" value="{{ last_username }}" name="login" id="inputLogin" class="form-control"  required autofocus>
+                <label for="inputEmail">Pseudo</label>
+              </div>
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputLogin" class="sr-only">Login</label>
-    <input type="text" value="{{ last_username }}" name="login" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+              <div class="form-label-group">
+                <input type="password" name="password" id="inputPassword" class="form-control"  required>
+                <label for="inputPassword">Mot de passe</label>
+                  <input type="hidden" name="_csrf_token" value="{{csrf_token('authenticate')}}">
+              </div>
+              
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Se connecter</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -28,9 +50,6 @@
             </label>
         </div>
     #}
+        {% include 'home/scripts.html.twig' %}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
 {% endblock %}
