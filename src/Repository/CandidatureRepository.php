@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Candidature;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -14,9 +15,11 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class CandidatureRepository extends ServiceEntityRepository
 {
+    private $now;
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Candidature::class);
+        $this->now = new \DateTime();
     }
 
     // /**
@@ -48,6 +51,38 @@ class CandidatureRepository extends ServiceEntityRepository
     }
     */
 
+    /*** POST TO BDD **/
+
+    /**
+     * /!\  le flush() se fait dans la fonction d'appel
+     * @param $candidate
+     * @param $lm
+     * @param $cv
+     * @param $message
+     */
+    public function insertNewCandidature($lm,$cv,$message,$candidate) {
+        $candidature = new Candidature();
+
+        $candidature->setMessage($message);
+        $candidature->setCoverLetter($cv);
+        $candidature->setResume($lm);
+
+        $candidature->setIsActive(true);
+        $candidature->setCandidate($candidate);
+        $candidature->setSubmitDate($this->now);
+
+        return$candidate;
+
+        // /!\  le flush() se fait dans la fonction d'appel : avec une injection de dépendance EntityManagerInterface $em ($em->flush)
+
+    }
+
+    /*** GET FROM BDD **/
+
+    /**
+     * @param int $limit
+     * @return Candidature[]
+     */
     public function findByLatestLimitedBy(int $limit){
         return $this->findBy(
             [],
