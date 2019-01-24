@@ -37,7 +37,7 @@ class Status extends SuperClass
     /**
      * @return mixed
      */
-    private function __toString()
+    public function __toString()
     {
         return $this->name;
     }

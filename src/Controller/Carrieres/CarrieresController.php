@@ -32,10 +32,6 @@
          */
         public function postuler(Request $request, EntityManagerInterface $em)
         {
-
-            $now = new \DateTime();
-            $candidature = new Candidature();
-            $candidate = new Candidate();
             // Enregistrement des entités, liaison candidature/candidat, upload des fichiers...
             // Utilisation des repository concernés
             // Logique création candidature & candidat
@@ -43,6 +39,10 @@
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+                $candidate = new Candidate();
+                $candidature = new Candidature();
+                $now = new \DateTime();
+
                 $postuler = $form->getData();
 
                 var_dump($postuler);
@@ -52,19 +52,20 @@
                 $candidate->setFirstname($postuler['firstname']);
                 $candidate->setLastname($postuler['lastname']);
                 $candidate->setEmail($postuler['firstname']);
-                $em->persist($candidature);
 
-                //$candidature->setCandidate();
+                $em->persist($candidate);
+
                 $candidature->setMessage($postuler['message']);
                 $candidature->setCoverLetter($postuler['cv']);
                 $candidature->setResume($postuler['lm']);
 
-                $candidature->setIsActive(1);
+                $candidature->setIsActive(true);
+                $candidature->setCandidate($candidate);
                 $candidature->setSubmitDate($now);
 
                 var_dump($candidate, $candidature);
 
-                $em->persist($candidate);
+                $em->persist($candidature);
 
 
 
