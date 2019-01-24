@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\LocationOffer;
 use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -16,10 +17,12 @@ class OfferRepository extends ServiceEntityRepository
 {
 
     private $limit;
+    private $dateNow;
 
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Offer::class);
+        $this->dateNow = new \DateTime;
     }
 
     /**
@@ -57,12 +60,6 @@ class OfferRepository extends ServiceEntityRepository
         ;
     }
 
-    public function allIsActive(){
-        return $this->findBy(
-            ['is_active' => 1],
-            ['created_at' => 'DESC']
-        );
-    }
 */
 
     /**
@@ -76,24 +73,48 @@ class OfferRepository extends ServiceEntityRepository
     ORDER BY o.created_at = 'DESC';
      *
      */
-    public function  findAllByDate() {
-        $requests =  $this->createQueryBuilder('o')
-            ->select('*')
-            ->where('o.start_publication_date < date(NOW())')
-            ->andWhere('o.end_publication_date > date(NOW())')
-            ->andWhere('o.is_active = 1')
-            ->orderBy('o.created_at','DESC')
-            ->getQuery()
-        ;
 
-        //var_dump($requests);
-        $requests =
-            $this->findBy(
-             ['start_publication_date' => '<  date(NOW()) '],
-             ['created_at' => 'DESC'],
-             5
-            );
-        return $requests;
+    public function finOneBySlug($slug){
+
+        return $request = $this->createQueryBuilder('o')
+            ->join('o.location_id', 'l')
+            ->andWhere('l.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->addSelect('t')
+            ->getQuery()
+            ->getResult()
+            ;
+
+    }
+    public function search($term)
+    {
+        return $this->createQueryBuilder('cat')
+           /* ->andWhere('cat.id LIKE :searchTerm
+                OR cat.iconKey LIKE :searchTerm
+                OR fc.fortune LIKE :searchTerm')*/
+
+            ->andWhere('cat.location_id = :searchTerm')
+
+            ->leftJoin('cat.slug', 'fc')
+            ->setParameter('searchTerm', '%'.$term.'%')
+            ->getQuery()
+            ->execute();
+    }
+
+
+    public function  findAllActualActive() {
+       return $requests =  $this->createQueryBuilder('o')
+           ->where('o.is_active = 1')
+            ->andWhere('o.start_publication_date < :beforenow')
+            ->andWhere('o.end_publication_date > :afternow')
+
+            ->setParameter("beforenow", $this->dateNow)
+            ->setParameter("afternow", $this->dateNow)
+
+            ->orderBy('o.created_at', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
 
@@ -113,7 +134,7 @@ class OfferRepository extends ServiceEntityRepository
         }
 
         return $this->findBy(
-            ['is_active' => 1],
+            [],
             ['created_at' => 'DESC'],
             $this->limit
         );
