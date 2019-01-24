@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Location{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+    <h1>Location</h1>
+
+    <table class="tableau table table-striped table-hover table-bordered">
+        <tbody>
+            <tr>
+                <th>Ville</th>
+                <td>{{ location.city }}</td>
+            </tr>
+            <tr>
+                <th>Code Postale</th>
+                <td>{{ location.postalCode }}</td>
+            </tr>
+        </tbody>
+    </table>
+        <div class="text-right mt-4">
+            <a href="{{ path('location_edit', {'id': location.id}) }}" class="btn btn-primary">Éditer</a>
+        </div>
+    </div>
+{% endblock %}
