@@ -5,11 +5,11 @@
     use App\Entity\LocationOffer;
     use App\Entity\Offer;
     use App\Form\PostulerType;
+    use Doctrine\ORM\EntityManager;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
-    use Symfony\Component\HttpFoundation\Request;
 
     class CarrieresController extends AbstractController
     {
@@ -34,6 +34,7 @@
                 // Logique création candidature & candidat
             $form = $this->createForm(PostulerType::class);
             $form->handleRequest($request);
+
             if ($form->isSubmitted() && $form->isValid()) {
                 $this->getDoctrine()->getManager()->flush();
 
@@ -63,10 +64,13 @@
         /**
          * @Route("/carrieres/offre/{offerSlug}", name="offre")
          */
-        public function offre(Request $resquest, Offer $offer, LocationOffer $locationOffer): Response
+        //public function offre(Offer $offer): Response
+        public function offre(Request $resquest, Offer $offer, LocationOffer $locationOffer, EntityManager $em): Response
         {
 
-            $offerSlug = $locationOffer->getSlug();
+
+           $offerSlug = $locationOffer->getSlug();
+                //$lo = $resquest->query->get('slug');
 
             return $this->render('carrieres/offre/index.html.twig', [
                 'controller_name' => 'CarrieresController',
