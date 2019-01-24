@@ -5,7 +5,9 @@ namespace App\Repository;
 use App\Entity\LocationOffer;
 use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method Offer|null find($id, $lockMode = null, $lockVersion = null)
@@ -62,46 +64,17 @@ class OfferRepository extends ServiceEntityRepository
 
 */
 
+
     /**
-     * @param string $slug
-     *
-    select *
-    from offer o
-    WHERE date(NOW()) > o.start_publication_date
-    AND date(now()) < o.end_publication_date
-    AND o.is_active = 1
-    ORDER BY o.created_at = 'DESC';
-     *
+     * carrières/offres
+     *  select *
+     *from offer o
+     *WHERE date(NOW()) > o.start_publication_date
+     *AND date(now()) < o.end_publication_date
+     *AND o.is_active = 1
+     * ORDER BY o.created_at = 'DESC';
+     * @return Offer[]
      */
-
-    public function finOneBySlug($slug){
-
-        return $request = $this->createQueryBuilder('o')
-            ->join('o.location_id', 'l')
-            ->andWhere('l.slug = :slug')
-            ->setParameter('slug', $slug)
-            ->addSelect('t')
-            ->getQuery()
-            ->getResult()
-            ;
-
-    }
-    public function search($term)
-    {
-        return $this->createQueryBuilder('cat')
-           /* ->andWhere('cat.id LIKE :searchTerm
-                OR cat.iconKey LIKE :searchTerm
-                OR fc.fortune LIKE :searchTerm')*/
-
-            ->andWhere('cat.location_id = :searchTerm')
-
-            ->leftJoin('cat.slug', 'fc')
-            ->setParameter('searchTerm', '%'.$term.'%')
-            ->getQuery()
-            ->execute();
-    }
-
-
     public function  findAllActualActive() {
        return $requests =  $this->createQueryBuilder('o')
            ->where('o.is_active = 1')
@@ -118,9 +91,6 @@ class OfferRepository extends ServiceEntityRepository
     }
 
 
-    public function test(){
-
-    }
    /**
      * Request all offer Active and order by descendant
      * @param $limit
