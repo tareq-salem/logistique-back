@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\SuperClass as SuperClass;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ContractTypeRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\StatusRepository")
  */
-class ContractType extends SuperClass
+class Status extends SuperClass
 {
     /**
      * @ORM\Id()
@@ -25,14 +25,22 @@ class ContractType extends SuperClass
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean")
      */
-    private $color;
+    private $is_active;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="contratType")
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="status")
      */
     private $offers;
+
+    /**
+     * @return mixed
+     */
+    private function __toString()
+    {
+        return $this->name;
+    }
 
     public function __construct()
     {
@@ -57,14 +65,14 @@ class ContractType extends SuperClass
         return $this;
     }
 
-    public function getColor(): ?string
+    public function getIsActive(): ?bool
     {
-        return $this->color;
+        return $this->is_active;
     }
 
-    public function setColor(string $color): self
+    public function setIsActive(bool $is_active): self
     {
-        $this->color = $color;
+        $this->is_active = $is_active;
 
         return $this;
     }
@@ -81,7 +89,7 @@ class ContractType extends SuperClass
     {
         if (!$this->offers->contains($offer)) {
             $this->offers[] = $offer;
-            $offer->setContratType($this);
+            $offer->setStatus($this);
         }
 
         return $this;
@@ -92,17 +100,11 @@ class ContractType extends SuperClass
         if ($this->offers->contains($offer)) {
             $this->offers->removeElement($offer);
             // set the owning side to null (unless already changed)
-            if ($offer->getContratType() === $this) {
-                $offer->setContratType(null);
+            if ($offer->getStatus() === $this) {
+                $offer->setStatus(null);
             }
         }
 
         return $this;
-    }
-    public function __toString(){
-        // to show the name of the Category in the select
-        return $this->name;
-        // to show the id of the Category in the select
-        // return $this->id;
     }
 }
