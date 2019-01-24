@@ -4,6 +4,7 @@
 
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\Routing\Annotation\Route;
+    use Symfony\Component\HttpFoundation\Request;
 
     class CarrieresController extends AbstractController
     {
@@ -21,10 +22,25 @@
          * candidature spontannee
          * @Route("/carrieres/postuler", name="postuler")
          */
-        public function postuler()
+        public function postuler(Request $request)
         {
+            $form = $this->createForm(CandidatureType::class);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                // Logique création candidature & candidat
+                // Utilisation des repository concernés
+                // Enregistrement des entités, liaison candidature/candidat, upload des fichiers...
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('candidature_index', [
+                    'id' => $candidature->getId(),
+                ]);
+            }
+
             return $this->render('carrieres/postuler/index.html.twig', [
                 'controller_name' => 'CarrieresController',
+                'form' => $form->createView(),
             ]);
         }
 
