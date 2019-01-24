@@ -1,17 +1,5 @@
 {{ form_start(form) }}
 <div class="container">
-    <div class="row">
-        <div class="col md-2">{{ form_row(form.name) }}</div>
-
-    </div>
-    <div class="row">
-        <div class="col md-2">
-            <div id="cp2" class="input-group colorpicker-component">
-                <input type="text" value="#00AABB" class="form-control" />
-                <span class="input-group-addon"><i></i></span>
-            </div>
-        </div>
-    </div>
     {{ form_rest(form) }}
     <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
     {{ form_end(form) }}

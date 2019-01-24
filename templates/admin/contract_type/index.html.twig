@@ -28,8 +28,8 @@
                     </span>
                 </td>
                 <td>
-                    <a href="{{ path('contract_type_show', {'id': contract_type.id}) }}" class="btn btn-warning" style="margin-right: 5px;"><i style="color: white;" class="fas fa-edit"></i></a>
-                    <a href="{{ path('contract_type_edit', {'id': contract_type.id}) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                    <a href="{{ path('contract_type_edit', {'id': contract_type.id}) }}" class="btn btn-warning" style="margin-right: 5px;"><i style="color: white;" class="fas fa-edit"></i></a>
+                    <a href="{{ path('contract_type_delete', {'id': contract_type.id}) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                 </td>
             </tr>
         {% endfor %}
