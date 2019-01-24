@@ -66,8 +66,6 @@
                 $this->addFlash('success',
                     $postuler['firstname']. ' '.$postuler['lastname']. ' '.'Candidature envoyé créée!!');
 
-
-
                 $this->getDoctrine()->getManager()->flush();
 
                 //Retourner un message de Bon sumit

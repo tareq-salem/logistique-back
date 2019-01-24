@@ -49,15 +49,20 @@
             </div>
             <div class="form-row">
                 <div class="col md-6">
-                    <div>{{ form_row(form.cv) }}</div>
+                    {{ form_row(form.cv) }}
                 </div>
-                <div class="col md-6">{{ form_row(form.lm) }}</div>
+                <div class="col md-6">
+                    {{ form_row(form.lm) }}
+                </div>
             </div>
-            <div class="form-row textarea">
+            <div class="form-row">
                 <div class="col">{{ form_row(form.message) }}</div>
             </div>
         {{ form_rest(form) }}
+
+        
             <button type="submit">{{ button|default('Postuler') }}</button>
+         
         </form>
         {{ form_end(form) }}
     </main>

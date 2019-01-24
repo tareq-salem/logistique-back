@@ -23,10 +23,13 @@ class PostulerType extends AbstractType
             ->add('lastname', TextType::class, [
                 'label' => 'Nom'
             ])
-            ->add('cv', FileType::class)
-            ->add('lm', FileType::class)
+            ->add('cv', FileType::class, [
+                'label' => 'Curriculum vitae', 
+                'attr' => ['class' => 'form-control-file']
+            ])    
+            ->add('lm', FileType::class, ['label' => 'Lettre de motivation'])
             ->add('message', TextareaType::class, [
-                'attr' => ['class' => 'tinymce'],
+                'attr' => ['class' => 'textarea']
             ]);
     }
 
