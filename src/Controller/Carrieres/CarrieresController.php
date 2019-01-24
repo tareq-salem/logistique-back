@@ -2,7 +2,12 @@
 
     namespace App\Controller\Carrieres;
 
+    use App\Entity\LocationOffer;
+    use App\Entity\Offer;
+    use App\Form\PostulerType;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Component\HttpFoundation\Request;
 
@@ -24,20 +29,19 @@
          */
         public function postuler(Request $request)
         {
-            $form = $this->createForm(CandidatureType::class);
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                // Logique création candidature & candidat
-                // Utilisation des repository concernés
                 // Enregistrement des entités, liaison candidature/candidat, upload des fichiers...
+                // Utilisation des repository concernés
+                // Logique création candidature & candidat
+            $form = $this->createForm(PostulerType::class);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
                 $this->getDoctrine()->getManager()->flush();
 
-                return $this->redirectToRoute('candidature_index', [
-                    'id' => $candidature->getId(),
-                ]);
+                /*
+                 * Retourner un message de Bon sumit
+                return $this->redirectToRoute('postuler');
+                */
             }
-
             return $this->render('carrieres/postuler/index.html.twig', [
                 'controller_name' => 'CarrieresController',
                 'form' => $form->createView(),
@@ -57,9 +61,21 @@
         ////////////////////////////////////////// TODO
 
         /**
-         * @Route("/carrieres/offre/{slug}", name="offre")
+         * @Route("/carrieres/offre/{offerSlug}", name="offre")
          */
-        public function offre()
+        public function offre(Request $resquest, Offer $offer, LocationOffer $locationOffer): Response
+        {
+
+            $offerSlug = $locationOffer->getSlug();
+
+            return $this->render('carrieres/offre/index.html.twig', [
+                'controller_name' => 'CarrieresController',
+                'offer' => $offer,
+                'slug'=> $offerSlug
+            ]);
+        }
+
+        public function minou()
         {
             return $this->render('carrieres/offre/index.html.twig', [
                 'controller_name' => 'CarrieresController',

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Éditer une localisation{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+    <h1>Éditer une localisation</h1>
+        <div class="raw">
+            {{ include('admin/location/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+        </div>
+    </div>
+{% endblock %}
