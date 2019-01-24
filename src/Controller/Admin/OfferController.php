@@ -59,6 +59,7 @@ class OfferController extends AbstractController
     }
 
     /**
+     * TODO est ce que ce ne serait pas plus logique de faire /edit/{slug} dans le sens où si le slug fait 255 char on ne verrait le terme /edit
      * @Route("/{slug}/edit", name="admin_offer_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Offer $offer): Response
