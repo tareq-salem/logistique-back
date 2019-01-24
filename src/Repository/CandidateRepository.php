@@ -47,4 +47,25 @@ class CandidateRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * /!\  le flush() se fait dans la fonction d'appel
+     * @param $firsname
+     * @param $lastname
+     * @param $email
+     */
+    public function insertNewCandidate($firsname, $lastname, $email){
+
+        $candidate = new Candidate();
+
+        $candidate->setFirstname($firsname);
+        $candidate->setLastname($lastname);
+        $candidate->setEmail($email);
+
+        return $candidate;
+
+
+        // /!\  leflush() se fait dans la fonction d'appel : avec une injection de dépendance EntityManagerInterface $em ($em->flush)
+
+    }
 }
