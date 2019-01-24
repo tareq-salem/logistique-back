@@ -13,16 +13,18 @@ use App\Entity\Offer;
 use App\Repository\LocationOfferRepository;
 use App\Repository\OfferRepository;
 use Doctrine\Common\EventSubscriber;
-use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+//use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Mapping\Entity;
 
 class CreateSlugSubscriber implements EventSubscriber
 {
-    private $offerRepository;
+    //private $offerRepository;
 
-    public function __construct(OfferRepository $offerRepository)
+    public function __construct()
     {
-        $this->offerRepository = $offerRepository;
+        //$this->offerRepository = $offerRepository;
     }
 
     /*
@@ -43,10 +45,13 @@ class CreateSlugSubscriber implements EventSubscriber
     public function postPersist(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
-        //var_dump($entity);
-        if ($entity instanceof Offer )
+
+        $offerRepository = $args->getEntityManager()->getRepository(Offer::class);
+
+        if ($entity instanceof LocationOffer )
         {
-            $this->offerRepository->createSlug($entity);
+
+            $offerRepository->createSlug($entity->getOffer());
         }
     }
 }
