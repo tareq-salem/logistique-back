@@ -42,28 +42,24 @@ class OfferRepository extends ServiceEntityRepository
      * Requète qui va créer le slug de l'offre
      * @return String $slug
      */
-    public function createSlug( Offer $offer) {
-        $URL_PREFIX = 'logisticc-recrute-';
+    // public function createSlug(Offer $offer) {
+    //     $TitreOffre = $offer->getTitle();
+    //     $TypeDeContrat = $offer->getContratType()->getName();
+    //     $TypeOffre = $offer->getOfferType()->getName();
+    //     $locationOffers = $offer->getLocationOffers();
 
-        $TitreOffre = $offer->getTitle();
-        $TypeDeContrat = $offer->getContratType()->getName();
-        $TypeOffre = $offer->getOfferType()->getName();
-        $locationOffers = $offer->getLocationOffers();
-        $CodePostal = null;
-        $Ville = null;
+    //     foreach ($locationOffers as $locationOffer)
+    //     {
+    //         $CodePostal = $locationOffer->getLocation()->getPostalCode();
+    //         $Ville = $locationOffer->getLocation()->getCity();
 
-        foreach ($locationOffers as $locationOffer)
-        {
-            $CodePostal = $locationOffer->getLocation()->getPostalCode();
-            $Ville = $locationOffer->getLocation()->getCity();
+    //         $slug = $this->URL_PREFIX . ' ' . $TitreOffre . ' ' . $TypeDeContrat . ' ' . $TypeOffre . ' ' . $CodePostal . ' ' . $Ville;
+    //         $slug = $this->slugger->slugify($slug);
 
-            $slug = $URL_PREFIX . ' ' . $TitreOffre . ' ' . $TypeDeContrat . ' ' . $TypeOffre . ' ' . $CodePostal . ' ' . $Ville;
-            $slug = $this->slugger->slugify($slug);
+    //         $locationOffer->setSlug($slug);
+    //     }
 
-            $locationOffer->setSlug($slug);
-        }
-
-    }
+    // }
 
     // /**
     //  * @return Offer[] Returns an array of Offer objects

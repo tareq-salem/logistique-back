@@ -7,6 +7,8 @@
     use App\Entity\LocationOffer;
     use App\Entity\Offer;
     use App\Form\PostulerType;
+    use App\Repository\CandidateRepository;
+    use App\Repository\CandidatureRepository;
     use Doctrine\ORM\EntityManager;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,7 +32,7 @@
          * candidature spontannee
          * @Route("/carrieres/postuler", name="postuler")
          */
-        public function postuler(Request $request, EntityManagerInterface $em)
+        public function postuler(Request $request, EntityManagerInterface $em, CandidatureRepository $candidatureRepository, CandidateRepository $candidateRepository)
         {
             // Enregistrement des entités, liaison candidature/candidat, upload des fichiers...
             // Utilisation des repository concernés
@@ -39,30 +41,22 @@
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $candidate = new Candidate();
-                $candidature = new Candidature();
-                $now = new \DateTime();
-
                 $postuler = $form->getData();
-
                 var_dump($postuler);
-                //$candidate->setFirstname($p)
 
-                $candidate->setFirstname($postuler['firstname']);
-                $candidate->setLastname($postuler['lastname']);
-                $candidate->setEmail($postuler['firstname']);
+                $candidate = $candidateRepository->insertNewCandidate(
+                    $postuler['firstname'],
+                    $postuler['lastname'],
+                    $postuler['email']
+                );
 
                 $em->persist($candidate);
-
-                $candidature->setMessage($postuler['message']);
-                $candidature->setCoverLetter($postuler['cv']);
-                $candidature->setResume($postuler['lm']);
-
-                $candidature->setIsActive(true);
-                $candidature->setCandidate($candidate);
-                $candidature->setSubmitDate($now);
-
-                var_dump($candidate, $candidature);
+                $candidature = $candidatureRepository->insertNewCandidature(
+                    $postuler['message'],
+                    $postuler['cv'],
+                    $postuler['lm'],
+                    $candidate
+                );
 
                 $em->persist($candidature);
 
