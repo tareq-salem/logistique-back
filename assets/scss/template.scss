@@ -80,23 +80,7 @@ button {
 
 /*############## FORMULAIRES ##############*/
 
-input {
-    &[type=file] {
-        padding: 8px 18px;
-        border: 1px solid $color-white;
-        border-radius: 3px;
-        text-decoration: none;
-        color: $color-white;
-        background-color: $color-third-3;
-        -webkit-transition-duration: 0.4s;
-        transition-duration: 0.4s;
-        &:hover {
-            border: 1px solid $color-third-3;
-            background-color: $color-white;
-            color: $color-third-3;
-        }
-    }
-}
+
 
 label {
     font-size: 16px;
@@ -105,7 +89,7 @@ label {
 }
 
 form {
-    max-width: 600px;
+    max-width: 650px;
     margin: auto;
     padding: 20px;
 }

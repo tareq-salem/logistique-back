@@ -10,19 +10,30 @@
 {% endblock %}
 
 {% block body %}
-    {# TODO Candidature spontanée link #}
-    <p><a href="">Candidature spontanée</a></p>
 
-    <h1>LISTE DES OFFRES</h1>
-    <ul>
-        <h2> offres</h2>
-        {% for offre in offres %}
-            <li>
-                {{ offre.title }} -
-                {{ offre.id }} -
-                {# TODO voir l'offre link #}<p><a href="">Voir l'offre</a></p>
-                {# TODO Postuler link #}<p><a href="">Postuler</a></p>
-            </li>
-        {% endfor %}
-    </ul>
+    {% include 'home/nav.html.twig' %}
+
+    <main>
+        <section class="map">
+                <iframe style="border: 0;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2710.207049454749!2d-1.5729033!3d47.2125309!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4805ec0fcda6c4cb%3A0xd620ca38dafa1e9a!2s2+Rue+La+Motte+Picquet%2C+44100+Nantes!5e0!3m2!1sfr!2sfr!4v1423244007186" frameborder="0"></iframe>
+        </section>
+        <section class="list">
+            <div class="spontaneous">
+                <a href="{{ path('postuler') }}"><button>Candidature spontanée</button></a>
+            </div>
+            <div class="job-container">
+                {% for offre in offres %}
+                    <a href="#">  {# TODO : redirect to detail offer  #}
+                        <div class="job">
+                            <h3>{{ offre.title }}</h3>
+                            <p>{{ offre.id }}</p>
+                        </div>
+                    </a>
+                {% endfor %}    
+            </div>
+        </section>
+    </main>
+
+    {% include 'includes/footer.html.twig' %}
+
 {% endblock %}

@@ -35,13 +35,8 @@
                     <a href="#">Paramètres</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ">
-                  <li class="nav-item">
-                      <a href=" {{ path('home')}}" class="nav-link">Deconnexion</a>
-                  </li>
-              </ul>
+            <a href="{{ path("logout") }}"><button>Déconnexion</button></a>
         </nav>
-        {# <p><a href="{{ path('home') }}">home</a></p> #}
     </div>
 </header>
 <main>
