@@ -17,6 +17,8 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
+    .addEntry('admin_offer', './assets/js/admin/offer.js')
+
     .addStyleEntry('app', './assets/scss/app.scss')
     .addStyleEntry('template', './assets/scss/template.scss')
     .addStyleEntry('variables', './assets/scss/variables.scss')
@@ -26,8 +28,12 @@ Encore
     .addStyleEntry('presentation', './assets/scss/presentation.scss')
     .addStyleEntry('references', './assets/scss/references.scss')
     .addStyleEntry('carrieres', './assets/scss/carrieres.scss')
+    .addStyleEntry('listOffer', './assets/scss/listOffer.scss')
     .addStyleEntry('contact', './assets/scss/contact.scss')
     .addStyleEntry('candidature', './assets/scss/candidature.scss')
+    .addStyleEntry('login', './assets/scss/login.scss')
+    .addStyleEntry('dashboard', './assets/scss/dashboard.scss')
+    .addStyleEntry('detail', './assets/scss/detail.scss')
 
     //.addEntry('app', './assets/js/app.js')
     //.addEntry('page1', './assets/js/page1.js')
@@ -57,7 +63,7 @@ Encore
     //.enableTypeScriptLoader()
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()

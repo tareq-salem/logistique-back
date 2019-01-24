@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{%  block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}Créer une nouvelle localisation{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+    <h1>Créer une nouvelle localisation</h1>
+        <div class="raw">
+    {{ include('admin/location/_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

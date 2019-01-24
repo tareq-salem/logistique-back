@@ -2,32 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\Candidature;
+use App\Entity\OfferType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CandidatureType extends AbstractType
+class OfferTypeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('created_at')
-            ->add('modified_at')
-            ->add('submit_date')
-            ->add('message')
-            ->add('cover_letter')
-            ->add('resume')
+            ->add('name')
             ->add('is_active')
-            ->add('candidate')
-            ->add('locationOffer')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Candidature::class,
+            'data_class' => OfferType::class,
         ]);
     }
 }

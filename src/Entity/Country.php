@@ -53,6 +53,14 @@ use Doctrine\ORM\Mapping as ORM;
         }
 
         /**
+         * @return mixed
+         */
+        public function __toString()
+        {
+            return $this->name;
+        }
+
+        /**
          * @return Collection|Location[]
          */
         public function getLocations(): Collection

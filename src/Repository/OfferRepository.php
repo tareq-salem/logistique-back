@@ -6,7 +6,9 @@ use App\Entity\LocationOffer;
 use App\Entity\Offer;
 use App\Utils\Slugger;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method Offer|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,12 +21,14 @@ class OfferRepository extends ServiceEntityRepository
 
     private $limit;
     private $slugger;
+    private $dateNow;
 
     public function __construct(RegistryInterface $registry, Slugger $slugger)
     {
         parent::__construct($registry, Offer::class);
 
         $this->slugger = $slugger;
+        $this->dateNow = new \DateTime;
     }
 
     /**
@@ -89,49 +93,35 @@ class OfferRepository extends ServiceEntityRepository
         ;
     }
 
-    public function allIsActive(){
-        return $this->findBy(
-            ['is_active' => 1],
-            ['created_at' => 'DESC']
-        );
-    }
 */
 
+
     /**
-     * @param string $slug
-     *
-    select *
-    from offer o
-    WHERE date(NOW()) > o.start_publication_date
-    AND date(now()) < o.end_publication_date
-    AND o.is_active = 1
-    ORDER BY o.created_at = 'DESC';
-     *
+     * carrières/offres
+     *  select *
+     *from offer o
+     *WHERE date(NOW()) > o.start_publication_date
+     *AND date(now()) < o.end_publication_date
+     *AND o.is_active = 1
+     * ORDER BY o.created_at = 'DESC';
+     * @return Offer[]
      */
-    public function  findAllByDate() {
-        $requests =  $this->createQueryBuilder('o')
-            ->select('*')
-            ->where('o.start_publication_date < date(NOW())')
-            ->andWhere('o.end_publication_date > date(NOW())')
-            ->andWhere('o.is_active = 1')
-            ->orderBy('o.created_at','DESC')
+    public function  findAllActualActive() {
+       return $requests =  $this->createQueryBuilder('o')
+           ->where('o.is_active = 1')
+            ->andWhere('o.start_publication_date < :beforenow')
+            ->andWhere('o.end_publication_date > :afternow')
+
+            ->setParameter("beforenow", $this->dateNow)
+            ->setParameter("afternow", $this->dateNow)
+
+            ->orderBy('o.created_at', 'DESC')
             ->getQuery()
+            ->getResult()
         ;
-
-        //var_dump($requests);
-        $requests =
-            $this->findBy(
-             ['start_publication_date' => '<  date(NOW()) '],
-             ['created_at' => 'DESC'],
-             5
-            );
-        return $requests;
     }
 
 
-    public function test(){
-
-    }
    /**
      * Request all offer Active and order by descendant
      * @param $limit
@@ -145,7 +135,7 @@ class OfferRepository extends ServiceEntityRepository
         }
 
         return $this->findBy(
-            ['is_active' => 1],
+            [],
             ['created_at' => 'DESC'],
             $this->limit
         );
