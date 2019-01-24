@@ -7,11 +7,13 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class OfferType extends AbstractType
+class Offer1Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('created_at')
+            ->add('modified_at')
             ->add('title')
             ->add('reference')
             ->add('is_active')

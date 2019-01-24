@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offer index{% endblock %}
+
+{% block body %}
+    <h1>Offer index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Created_at</th>
+                <th>Modified_at</th>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Reference</th>
+                <th>Is_active</th>
+                <th>End_publication_date</th>
+                <th>Start_publication_date</th>
+                <th>Salary</th>
+                <th>Description</th>
+                <th>Duration</th>
+                <th>Hour_per_week</th>
+                <th>Availability</th>
+                <th>Required_profil</th>
+                <th>Required_experience</th>
+                <th>Benefits</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for offer in offers %}
+            <tr>
+                <td>{{ offer.createdAt ? offer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ offer.modifiedAt ? offer.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ offer.id }}</td>
+                <td>{{ offer.title }}</td>
+                <td>{{ offer.reference }}</td>
+                <td>{{ offer.isActive ? 'Yes' : 'No' }}</td>
+                <td>{{ offer.endPublicationDate ? offer.endPublicationDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ offer.startPublicationDate ? offer.startPublicationDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ offer.salary }}</td>
+                <td>{{ offer.description }}</td>
+                <td>{{ offer.duration }}</td>
+                <td>{{ offer.hourPerWeek }}</td>
+                <td>{{ offer.availability }}</td>
+                <td>{{ offer.requiredProfil }}</td>
+                <td>{{ offer.requiredExperience }}</td>
+                <td>{{ offer.benefits }}</td>
+                {#<td>#}
+                    {#<a href="{{ path('admin_offer_show', {'id': offer.id}) }}">show</a>#}
+                    {#<a href="{{ path('admin_offer_edit', {'id': offer.id}) }}">edit</a>#}
+                {#</td>#}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="17">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_offer_new') }}">Create new</a>
+{% endblock %}
