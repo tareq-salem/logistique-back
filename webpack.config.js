@@ -28,7 +28,7 @@ Encore
     .addStyleEntry('presentation', './assets/scss/presentation.scss')
     .addStyleEntry('references', './assets/scss/references.scss')
     .addStyleEntry('carrieres', './assets/scss/carrieres.scss')
-    //.addStyleEntry('listOffer', './assets/scss/listOffer.scss')
+    .addStyleEntry('listOffer', './assets/scss/listOffer.scss')
     .addStyleEntry('contact', './assets/scss/contact.scss')
     .addStyleEntry('candidature', './assets/scss/candidature.scss')
     .addStyleEntry('login', './assets/scss/login.scss')
