@@ -8,18 +8,23 @@
 
 namespace App\EventListener;
 
-
 use App\Entity\LocationOffer;
 use App\Entity\Offer;
 use App\Repository\LocationOfferRepository;
 use App\Repository\OfferRepository;
-use App\Utils\Slugger;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 
-class CreateSlugSubsciber implements EventSubscriber
+class CreateSlugSubscriber implements EventSubscriber
 {
+    private $offerRepository;
+
+    public function __construct(OfferRepository $offerRepository)
+    {
+        $this->offerRepository = $offerRepository;
+    }
+
     /*
      * @return array des événements à surveiller
      */
@@ -38,10 +43,10 @@ class CreateSlugSubsciber implements EventSubscriber
     public function postPersist(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
-
-        if ($entity instanceof Offer)
+        //var_dump($entity);
+        if ($entity instanceof Offer )
         {
-            $entity->createSlug();
+            $this->offerRepository->createSlug($entity);
         }
     }
 }

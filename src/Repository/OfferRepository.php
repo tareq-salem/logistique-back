@@ -18,10 +18,13 @@ class OfferRepository extends ServiceEntityRepository
 {
 
     private $limit;
+    private $slugger;
 
-    public function __construct(RegistryInterface $registry)
+    public function __construct(RegistryInterface $registry, Slugger $slugger)
     {
         parent::__construct($registry, Offer::class);
+
+        $this->slugger = $slugger;
     }
 
     /**
@@ -35,26 +38,27 @@ class OfferRepository extends ServiceEntityRepository
      * Requète qui va créer le slug de l'offre
      * @return String $slug
      */
-    public function createSlug(Offer $offer, Slugger $slugger, LocationOffer $locationOffer) {
+    public function createSlug( Offer $offer) {
         $URL_PREFIX = 'logisticc-recrute-';
 
         $TitreOffre = $offer->getTitle();
         $TypeDeContrat = $offer->getContratType()->getName();
         $TypeOffre = $offer->getOfferType()->getName();
-//        $locationOffers = $offer->getLocationOffers();
-//        $CodePostal = null;
-//        $Ville = null;
-//
-//        foreach ($locationOffers as $locationOffer)
-//        {
-//            $CodePostal = $locationOffer->getLocation()->getPostalCode();
-//            $Ville = $locationOffer->getLocation()->getCity();
-//        }
+        $locationOffers = $offer->getLocationOffers();
+        $CodePostal = null;
+        $Ville = null;
 
-        $slug = $URL_PREFIX . ' ' . $TitreOffre . ' ' . $TypeDeContrat . ' ' . $TypeOffre . ' ' . $CodePostal . ' ' . $Ville;
-        $slug = $slugger->slugify($slug);
-        
-        $locationOffer->setSlug($slug);
+        foreach ($locationOffers as $locationOffer)
+        {
+            $CodePostal = $locationOffer->getLocation()->getPostalCode();
+            $Ville = $locationOffer->getLocation()->getCity();
+
+            $slug = $URL_PREFIX . ' ' . $TitreOffre . ' ' . $TypeDeContrat . ' ' . $TypeOffre . ' ' . $CodePostal . ' ' . $Ville;
+            $slug = $this->slugger->slugify($slug);
+
+            $locationOffer->setSlug($slug);
+        }
+
     }
 
     // /**
