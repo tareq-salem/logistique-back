@@ -72,11 +72,12 @@ a:focus {
   #sidebar {
     min-width: 13%;
     // max-width: 250px;
-    position: absolute;
+    //position: absolute;
     height: 100%;
     background: $color-primary;
     color: #fff;
     transition: all 0.3s;
+    position: fixed;
   }
   
   #sidebar a,
