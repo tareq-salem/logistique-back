@@ -60,12 +60,12 @@ class CandidatureRepository extends ServiceEntityRepository
      * @param $cv
      * @param $message
      */
-    public function insertNewCandidature($lm,$cv,$message,$candidate) {
+    public function insertNewCandidature($message,$lm,$cv,$candidate) {
         $candidature = new Candidature();
 
+        $candidature->setMessage($message);
         $candidature->setCoverLetter($cv);
         $candidature->setResume($lm);
-        $candidature->setMessage($message);
 
         $candidature->setIsActive(true);
         $candidature->setCandidate($candidate);
