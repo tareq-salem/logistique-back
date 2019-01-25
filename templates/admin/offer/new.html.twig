@@ -1,11 +1,19 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'admin/base_admin.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dashboard')}}
+{% endblock %}
 {% block title %}New Offer{% endblock %}
 
 {% block body %}
-    <h1>Create new Offer</h1>
+    <main>
+        <div class="card">
+            <h1 class="tableau table table-striped table-hover table-bordered" >Create new Offer</h1>
+            <div class="card-body">
+                {{ include('offer/_form.html.twig') }}
 
-    {{ include('offer/_form.html.twig') }}
-
-    <a href="{{ path('offer_index') }}">back to list</a>
+                <a href="{{ path('offer_index') }}">back to list</a>
+            </div>
+        </div>
+    </main>
 {% endblock %}

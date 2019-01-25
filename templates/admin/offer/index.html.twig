@@ -1,41 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base_admin.html.twig' %}
 {% block stylesheets %}
-{{ parent() }}
-{{ encore_entry_link_tags('admin_offers')}}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dashboard')}}
 {% endblock %}
 {% block body %}
-    <header>
-        <div class="wrapper">
-            <!-- Sidebar Holder -->
-            <nav id="sidebar">
-              <div class="sidebar-header">
-                <h3>Logisticc</h3>
-              </div>
-              <ul class="list-unstyled components">
-                <a id="dashboard" href="{{path('admin')}}">Dashboard</a>
-                <li>
-                    <p>Offres</p>
-                </li>
-                <li>
-                  <a href="#">Candidatures</a>
-                </li>
-                <li>
-                  <a href="#">Types</a>
-                </li>
-                <li>
-                  <a href="#">Status</a>
-                </li>
-                <li>
-                  <a href="#">Paramètres</a>
-                </li>
-              </ul>
-              <ul class="navbar-nav ">
-                  <li class="nav-item">
-                      <a href="{{ path('home') }}" class="nav-link">Deconnexion</a>
-                  </li>
-              </ul>
-            </nav>
-    </header>
             <main>
               <div class="card">
                     <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Liste des offres</h3>
@@ -87,7 +55,7 @@
                         {% endfor %}
                         </tbody>
                     </table>
-                    <div class="pagination">
+                    <div class="pagination" >
                         {{ knp_pagination_render(offers) }}
                     </div>
                 </div>
