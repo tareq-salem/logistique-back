@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Candidature;
+use App\Utils\CandidatureUploader;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -16,10 +17,14 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 class CandidatureRepository extends ServiceEntityRepository
 {
     private $now;
-    public function __construct(RegistryInterface $registry)
+    private $uploaderFiles;
+
+
+    public function __construct(RegistryInterface $registry, CandidatureUploader $uploaderFiles)
     {
         parent::__construct($registry, Candidature::class);
         $this->now = new \DateTime();
+        $this->uploaderFiles = $uploaderFiles;
     }
 
     // /**
@@ -60,12 +65,16 @@ class CandidatureRepository extends ServiceEntityRepository
      * @param $cv
      * @param $message
      */
-    public function insertNewCandidature($lm,$cv,$message,$candidate) {
+    public function insertNewCandidature($message,$lm,$cv,$candidate) {
+
+        $cv = $this->uploaderFiles->uploadFile($cv);
+        $lm = $this->uploaderFiles->uploadFile($lm);
+
         $candidature = new Candidature();
 
+        $candidature->setMessage($message);
         $candidature->setCoverLetter($cv);
         $candidature->setResume($lm);
-        $candidature->setMessage($message);
 
         $candidature->setIsActive(true);
         $candidature->setCandidate($candidate);

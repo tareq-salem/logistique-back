@@ -1,45 +1,46 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'admin/base_admin.html.twig' %}
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('template')}}
+    {{ encore_entry_link_tags('dashboard')}}
 {% endblock %}
-
 
 {% block title %}Type de contrat{% endblock %}
 
 
 {% block body %}
-    <div class="container mt-4">
-    <h1>Type de contrat</h1>
-
-    <table class="tableau table table-striped table-hover table-bordered">
-        <thead>
-            <tr>
-                <th style="width: 80%;">Nom</th>
-                <th>Couleurs</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for contract_type in contract_types %}
-            <tr>
-                <td>{{ contract_type.name }}</td>
-                <td>
-                    <span style="display: block; background-color: {{ contract_type.color }}; width: 25px; height: 25px; -webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;">
-                    </span>
-                </td>
-                <td>
-                    <a href="{{ path('contract_type_edit', {'id': contract_type.id}) }}" class="btn btn-warning" style="margin-right: 5px;"><i style="color: white;" class="fas fa-edit"></i></a>
-                    <a href="{{ path('contract_type_delete', {'id': contract_type.id}) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <div class="text-right mt-4">
-        <a href="{{ path('contract_type_new') }}" class="btn btn-primary">Créer</a>
+<main>
+    <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Type de contrat</h3>
+        <div class="card-body">
+            <table class="tableau table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 80%;">Nom</th>
+                        <th>Couleurs</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for contract_type in contract_types %}
+                    <tr>
+                        <td>{{ contract_type.name }}</td>
+                        <td>
+                            <span style="display: block; background-color: {{ contract_type.color }}; width: 25px; height: 25px; -webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;">
+                            </span>
+                        </td>
+                        <td>
+                            <a href="{{ path('contract_type_edit', {'id': contract_type.id}) }}" class="btn btn-warning" style="margin-right: 5px;"><i style="color: white;" class="fas fa-edit"></i></a>
+                            <a href="{{ path('contract_type_delete', {'id': contract_type.id}) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-right mt-4">
+                <a href="{{ path('contract_type_new') }}" class="btn btn-primary">Créer</a>
+            </div>
+        </div>
     </div>
-    </div>
+</main>
 
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'admin/base_admin.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dashboard')}}
+{% endblock %}
+{% block title %}Edit Candidature{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="card">
+            <h3 class="card-header text-center font-weight-bold text-uppercase py-4" >Edit Candidature</h3>
+            <div class="card-body">
+
+                {{ include('candidature/_form.html.twig', {'button_label': 'Update'}) }}
+
+                <a href="{{ path('candidature_index') }}">back to list</a>
+
+                {{ include('candidature/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </main>
+{% endblock %}

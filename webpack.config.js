@@ -33,8 +33,6 @@ Encore
     .addStyleEntry('candidature', './assets/scss/candidature.scss')
     .addStyleEntry('login', './assets/scss/login.scss')
     .addStyleEntry('dashboard', './assets/scss/dashboard.scss')
-    .addStyleEntry('admin_offers', './assets/scss/admin_offer.scss')
-    .addStyleEntry('admin_detail', './assets/scss/admin_detail.scss')
     .addStyleEntry('detail', './assets/scss/detail.scss')
 
     //.addEntry('app', './assets/js/app.js')

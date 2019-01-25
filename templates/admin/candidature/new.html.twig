@@ -3,22 +3,18 @@
     {{ parent() }}
     {{ encore_entry_link_tags('dashboard')}}
 {% endblock %}
-{% block title %}New Offer{% endblock %}
+{% block title %}New Candidature{% endblock %}
 
 {% block body %}
-    <h1>Create new Offer</h1>
-
-    {{ include('admin/offer/_form.html.twig') }}
-
-    
-
     <main>
         <div class="card">
-            <h1 class="tableau table table-striped table-hover table-bordered" >Create new Offer</h1>
+            <h3 class="card-header text-center font-weight-bold text-uppercase py-4" >Create new Candidature</h3>
             <div class="card-body">
-                {{ include('admin/offer/_form.html.twig') }}
+
+                {{ include('candidature/_form.html.twig') }}
+
+                <a href="{{ path('candidature_index') }}">back to list</a>
             </div>
         </div>
     </main>
-
 {% endblock %}

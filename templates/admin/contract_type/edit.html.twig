@@ -1,13 +1,20 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base_admin.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dashboard')}}
+{% endblock %}
 
 {% block title %}Éditer le type de contrat{% endblock %}
 
 {% block body %}
-    <div class="container mt-4">
-    <h1>Éditer le type de contrat</h1>
-        <div class="raw">
-         {{ include('admin/contract_type/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+    <main>
+        <div class="card">
+            <h3 class="card-header text-center font-weight-bold text-uppercase py-4" >Éditer le type de contrat</h3>
+            <div class="card-body">
+                <div class="raw">
+                    {{ include('admin/contract_type/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+                </div>
+            </div>
         </div>
-    </div>
-
+    </main>
 {% endblock %}

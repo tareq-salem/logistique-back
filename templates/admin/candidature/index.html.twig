@@ -1,0 +1,57 @@
+{% extends 'admin/base_admin.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dashboard')}}
+{% endblock %}
+{% block title %}Candidature index{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="card">
+            <h3 class="card-header text-center font-weight-bold text-uppercase py-4" >Candidature index</h3>
+
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Created_at</th>
+                        <th>Modified_at</th>
+                        <th>Id</th>
+                        <th>Submit_date</th>
+                        <th>Message</th>
+                        <th>Cover_letter</th>
+                        <th>Resume</th>
+                        <th>Is_active</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for candidature in candidatures %}
+                        <tr>
+                            <td>{{ candidature.createdAt ? candidature.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ candidature.modifiedAt ? candidature.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ candidature.id }}</td>
+                            <td>{{ candidature.submitDate ? candidature.submitDate|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ candidature.message }}</td>
+                            <td>{{ candidature.coverLetter }}</td>
+                            <td>{{ candidature.resume }}</td>
+                            <td>{{ candidature.isActive ? 'Yes' : 'No' }}</td>
+                            <td>
+                                <a href="{{ path('candidature_show', {'id': candidature.id}) }}">show</a>
+                                <a href="{{ path('candidature_edit', {'id': candidature.id}) }}">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ path('candidature_new') }}">Create new</a>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

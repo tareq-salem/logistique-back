@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Candidature;
 use App\Form\CandidatureType;
@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Candidate;
 
 /**
  * @Route("/candidature")
@@ -21,7 +20,7 @@ class CandidatureController extends AbstractController
      */
     public function index(CandidatureRepository $candidatureRepository): Response
     {
-        return $this->render('candidature/index.html.twig', [
+        return $this->render('admin/candidature/index.html.twig', [
             'candidatures' => $candidatureRepository->findAll(),
         ]);
     }
@@ -31,45 +30,19 @@ class CandidatureController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $dateTime = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
-        $lastName = $request->query->get('lastName');
-        $firstName = $request->query->get('firstName');
-        $email = $request->query->get('email');
-        $message = $request->query->get('message');
-        $cv = $request->query->get('cv');
-        $lm = $request->query->get('lm');
-
-        $candidate = new Candidate();
         $candidature = new Candidature();
-
         $form = $this->createForm(CandidatureType::class, $candidature);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $entityManager = $this->getDoctrine()->getManager();
-
-            $candidate->setFirstname($firstName);
-            $candidate->setLastname($lastName);
-            $candidate->setEmail($email);
-
-            $entityManager->persist($candidate);
-
-            $candidature->setMessage($message);
-            $candidature->setCoverLetter($cv);
-            $candidature->setResume($lm);
-            $candidature->setSubmitDate($dateTime);
-            $candidature->setCandidate($candidate);
-
             $entityManager->persist($candidature);
-
-
             $entityManager->flush();
 
             return $this->redirectToRoute('candidature_index');
         }
 
-        return $this->render('candidature/new.html.twig', [
+        return $this->render('admin/candidature/new.html.twig', [
             'candidature' => $candidature,
             'form' => $form->createView(),
         ]);
@@ -80,7 +53,7 @@ class CandidatureController extends AbstractController
      */
     public function show(Candidature $candidature): Response
     {
-        return $this->render('candidature/show.html.twig', [
+        return $this->render('admin/candidature/show.html.twig', [
             'candidature' => $candidature,
         ]);
     }
@@ -101,7 +74,7 @@ class CandidatureController extends AbstractController
             ]);
         }
 
-        return $this->render('candidature/edit.html.twig', [
+        return $this->render('admin/candidature/edit.html.twig', [
             'candidature' => $candidature,
             'form' => $form->createView(),
         ]);

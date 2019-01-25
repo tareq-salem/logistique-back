@@ -1,0 +1,38 @@
+<header>
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <img src="{{ asset('build/Logo_logisticc_white.svg') }}" height="150px" width="155px" alt="">
+                </div>
+                <ul class="list-unstyled components">
+                    <li>
+                        <a id="dashboard" href="{{path('admin')}}">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_offer_index' )}}">Offres</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('candidature_index') }}">Candidatures</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('offer_type_index') }}">Types d'offres</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('contract_type_index') }}">Types de contrats</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('status_index') }}">Statut</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('location_index') }}">Localisation</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Paramètres</a>
+                    </li>
+                </ul>
+                <a href="{{ path("logout") }}"><button style="margin-left: 4vh;">Déconnexion</button></a>
+            </nav>
+        </div>
+    </header>
