@@ -4,9 +4,9 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('nav')}}    
-    {{ encore_entry_link_tags('listOffer')}} 
-    {{ encore_entry_link_tags('footer')}}     
+    {{ encore_entry_link_tags('nav')}}
+    {{ encore_entry_link_tags('footer')}}
+    {{ encore_entry_link_tags('listOffer')}}
 {% endblock %}
 
 {% block body %}
@@ -14,8 +14,8 @@
     {% include 'home/nav.html.twig' %}
 
     <main>
-        <section class="map">
-                <iframe style="border: 0;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2710.207049454749!2d-1.5729033!3d47.2125309!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4805ec0fcda6c4cb%3A0xd620ca38dafa1e9a!2s2+Rue+La+Motte+Picquet%2C+44100+Nantes!5e0!3m2!1sfr!2sfr!4v1423244007186" frameborder="0"></iframe>
+        <section class="map" id="map">
+                <!--<iframe style="border: 0;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2710.207049454749!2d-1.5729033!3d47.2125309!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4805ec0fcda6c4cb%3A0xd620ca38dafa1e9a!2s2+Rue+La+Motte+Picquet%2C+44100+Nantes!5e0!3m2!1sfr!2sfr!4v1423244007186" frameborder="0"></iframe>-->
         </section>
         <section class="list">
             <div class="spontaneous">
@@ -29,10 +29,66 @@
                             <p>{{ offre.id }}</p>
                         </div>
                     </a>
-                {% endfor %}    
+                {% endfor %}
             </div>
         </section>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script>
+    <script>
+        map = new OpenLayers.Map("map");
+        map.addLayer(new OpenLayers.Layer.OSM());
+
+        epsg4326 =  new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
+        projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
+
+        var lonLat = new OpenLayers.LonLat(4.8028644, 45.770406).transform(epsg4326, projectTo);
+
+
+        var zoom=14;
+        map.setCenter (lonLat, zoom);
+
+        var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
+
+        // Define markers as "features" of the vector layer:
+        {% for offre in offres %}
+            var feature = new OpenLayers.Feature.Vector(
+                    new OpenLayers.Geometry.Point( -0.1279688, 51.5077286 ).transform(epsg4326, projectTo),
+                    {description:'<h4>{{ offre.title }}</h4><p style="background-color:{{ offre.contratType.color }}">{{ offre.contratType.name }}</p><a href="">Voir l\'offre</a>'} ,
+                    {externalGraphic: '{{ asset('build/marker.png') }}', graphicHeight: 80, graphicWidth: 76, graphicXOffset:-38, graphicYOffset:-80  }
+                );
+            vectorLayer.addFeatures(feature);
+        {% endfor %}
+
+        map.addLayer(vectorLayer);
+
+
+        //Add a selector control to the vectorLayer with popup functions
+        var controls = {
+          selector: new OpenLayers.Control.SelectFeature(vectorLayer, { onSelect: createPopup, onUnselect: destroyPopup })
+        };
+
+        function createPopup(feature) {
+          feature.popup = new OpenLayers.Popup.Anchored("pop",
+              feature.geometry.getBounds().getCenterLonLat(),
+              null,
+              '<div class="markerContent">'+feature.attributes.description+'</div>',
+              null,
+              false,
+              function() { controls['selector'].unselectAll(); }
+          );
+
+          //feature.popup.closeOnMove = true;
+          map.addPopup(feature.popup);
+        }
+
+        function destroyPopup(feature) {
+          feature.popup.destroy();
+          feature.popup = null;
+        }
+
+        map.addControl(controls['selector']);
+        controls['selector'].activate();
+    </script>
 
     {% include 'includes/footer.html.twig' %}
 
