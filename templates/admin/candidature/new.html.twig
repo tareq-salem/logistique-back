@@ -1,11 +1,20 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'admin/base_admin.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dashboard')}}
+{% endblock %}
 {% block title %}New Candidature{% endblock %}
 
 {% block body %}
-    <h1>Create new Candidature</h1>
+    <main>
+        <div class="card">
+            <h3 class="card-header text-center font-weight-bold text-uppercase py-4" >Create new Candidature</h3>
+            <div class="card-body">
 
-    {{ include('candidature/_form.html.twig') }}
+                {{ include('candidature/_form.html.twig') }}
 
-    <a href="{{ path('candidature_index') }}">back to list</a>
+                <a href="{{ path('candidature_index') }}">back to list</a>
+            </div>
+        </div>
+    </main>
 {% endblock %}

@@ -1,12 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base_admin.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dashboard')}}
+{% endblock %}
 
 {% block title %}Éditer une localisation{% endblock %}
 
 {% block body %}
-    <div class="container mt-4">
-    <h1>Éditer une localisation</h1>
-        <div class="raw">
-            {{ include('admin/location/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+    <main>
+        <div class="card">
+            <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Éditer une localisation</h3>
+            <div class="card-body">
+                <div class="raw">
+                    {{ include('admin/location/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+                </div>
+            </div>
         </div>
-    </div>
+    </main>
+
 {% endblock %}
