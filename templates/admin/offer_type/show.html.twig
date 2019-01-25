@@ -1,8 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base_admin.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dashboard')}}
+{% endblock %}
 
 {% block title %}OfferType{% endblock %}
 
 {% block body %}
+    <main><div class="card"><div class="card-body"></div></div></main>
     <h1>OfferType</h1>
 
     <table class="table">
