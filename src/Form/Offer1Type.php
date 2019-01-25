@@ -30,6 +30,7 @@ class Offer1Type extends AbstractType
             ->add('status')
             ->add('offerType')
             ->add('contratType')
+        
         ;
     }
 

@@ -44,10 +44,14 @@ class CreateSlugSubscriber implements EventSubscriber
         $entity = $args->getObject();
         $offerRepository = $args->getEntityManager()->getRepository(Offer::class);
 
-        if ($entity instanceof LocationOffer)
+        if ( $entity instanceof Offer)
         {
-            //$offerRepository->createSlug($entity->getOffer());
-            $this->slugManager->setSlug($entity);
+            $locationOffers = $entity->getLocationOffers();
+            foreach ($locationOffers as $locationOffer)
+            {
+                $this->slugManager->setSlug($locationOffer);
+            }
+            // $this->slugManager->setSlug($entity);
         }
     }
 

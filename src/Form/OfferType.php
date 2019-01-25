@@ -2,15 +2,25 @@
 
 namespace App\Form;
 
+use App\Entity\Location;
 use App\Entity\Offer;
+use App\Repository\LocationRepository;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\DBAL\Types\TextType;
 
 class OfferType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $data = $builder->getData();
+
         $builder
             ->add('title')
             ->add('reference')
@@ -28,6 +38,17 @@ class OfferType extends AbstractType
             ->add('status')
             ->add('offerType')
             ->add('contratType')
+            ->add('city', EntityType::class, [
+                'class'  => Location::class,
+                'multiple' => true,
+                'mapped' => false,
+                'query_builder' => function (LocationRepository $locationRepository) {
+                    return $locationRepository->createQueryBuilder('l')
+                        ->orderBy('l.city','ASC');
+                },
+                'choice_label' => 'city',
+                'data' => $data->getLocations()
+            ])
         ;
     }
 
