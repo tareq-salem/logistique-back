@@ -35,9 +35,8 @@ class OfferController extends AbstractController
      */
     public function show(LocationOffer $locationOffer): Response
     {
-        $offer = $locationOffer->getOffer();
         return $this->render('carrieres/offer/show.html.twig', [
-            'offer' => $offer,
+            'locationOffer' => $locationOffer,
         ]);
     }
 }

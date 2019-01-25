@@ -5,6 +5,7 @@
     {{ encore_entry_link_tags('nav')}}
     {{ encore_entry_link_tags('footer')}}
     {{ encore_entry_link_tags('detail')}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
 {% endblock %}
 
 {% block title %}Détail de l'offre{% endblock %}
@@ -16,26 +17,64 @@
         <!-- CODE -->
         <img src="{{ asset('build/bandeau_detail.jpg') }}" alt="">
         <section id="layout">
-            <h2>{{ offer.title }}</h2>
+            <h2>{{ locationOffer.offer.title }}</h2>
             <section id="corpus">
                 <h3>Description de l'offre</h3>
-                <p>{{ offer.description }}</p>
+                <p>{{ locationOffer.offer.description }}</p>
                 <h3>Profil recherché</h3>
-                <p>{{ offer.requiredProfil }}</p>
+                <p>{{ locationOffer.offer.requiredProfil }}</p>
             </section>
             <ul>
-                <li>Durée : {{ offer.duration }}</li>
-                <li>Temps de travail : {{ offer.hourPerWeek }}</li>
-                <li>Disponibilité : {{ offer.availability }}</li>
-                <li>Expérience demandée : {{ offer.requiredExperience }}</li>
-                <li>Rémunération : {{ offer.salary }}</li>
+                <li>Durée : {{ locationOffer.offer.duration }}</li>
+                <li>Temps de travail : {{ locationOffer.offer.hourPerWeek }}</li>
+                <li>Disponibilité : {{ locationOffer.offer.availability }}</li>
+                <li>Expérience demandée : {{ locationOffer.offer.requiredExperience }}</li>
+                <li>Rémunération : {{ locationOffer.offer.salary }}</li>
                 <li>Statut : </li>
-                <li>Avantages : {{ offer.benefits }}</li>
+                <li>Avantages : {{ locationOffer.offer.benefits }}</li>
             </ul>
         </section>
-        <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=4.8035842180252075%2C45.77175881817582%2C4.807124733924867%2C45.7733696312889&amp;layer=mapnik" style="border: 1px solid black"></iframe>
-        <a href=""><button type="button" name="postuler">Postuler</button></a>
+        <div id="map"></div>
+        <a href="{{ path('postuler') }}"><button type="button" name="postuler">Postuler</button></a>
     </main>
+
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+    crossorigin=""></script>
+
+    <script type="text/javascript">
+    			// On initialise la latitude et la longitude de Paris (centre de la carte)
+    			var lat = {{ locationOffer.location.latitude }};
+    			var lon = {{ locationOffer.location.longitude }};
+    			var offerMap = null;
+    			// Fonction d'initialisation de la carte
+    			function initMap() {
+    				// Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
+                    offerMap = L.map('map').setView([lat, lon], 16);
+                    // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
+                    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                        minZoom: 1,
+                        maxZoom: 20
+                    }).addTo(offerMap);
+                    addMarker();
+                }
+
+                function addMarker() {
+                    let customIcon = L.icon({
+                        iconUrl: '{{ asset('build/marker.png') }}',
+                        iconSize: [64,66],
+                        iconAnchor: [38, 80],
+                        popupAnchor: [-3, -76],
+                    });
+
+                    let marker = L.marker([lat, lon],{icon: customIcon}).addTo(offerMap);
+
+                }
+
+    			window.onload = function(){
+    				initMap();
+    			};
+    		</script>
 
     {{ include('includes/footer.html.twig') }}
 {% endblock %}
