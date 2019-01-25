@@ -343,4 +343,19 @@ class Offer extends SuperClass
         // to show the id of the Category in the select
         // return $this->id;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLocations(): ArrayCollection
+    {
+        $locations = new ArrayCollection();
+        $locationOffers = $this->getLocationOffers();
+        
+        foreach ($locationOffers as $locationOffer) {
+            $locations->add($locationOffer->getLocation());
+        }
+
+        return $locations;
+    }
 }
