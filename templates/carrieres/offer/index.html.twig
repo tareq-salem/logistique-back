@@ -41,7 +41,7 @@
         epsg4326 =  new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
         projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
 
-        var lonLat = new OpenLayers.LonLat( -0.1279688 ,51.5077286 ).transform(epsg4326, projectTo);
+        var lonLat = new OpenLayers.LonLat(4.8028644, 45.770406).transform(epsg4326, projectTo);
 
 
         var zoom=14;
@@ -54,7 +54,7 @@
             var feature = new OpenLayers.Feature.Vector(
                     new OpenLayers.Geometry.Point( -0.1279688, 51.5077286 ).transform(epsg4326, projectTo),
                     {description:'<h4>{{ offre.title }}</h4><p style="background-color:{{ offre.contratType.color }}">{{ offre.contratType.name }}</p><a href="">Voir l\'offre</a>'} ,
-                    {externalGraphic: 'http://localhost:8080/build/marker.png', graphicHeight: 80, graphicWidth: 76, graphicXOffset:-12, graphicYOffset:-25  }
+                    {externalGraphic: '{{ asset('build/marker.png') }}', graphicHeight: 80, graphicWidth: 76, graphicXOffset:-38, graphicYOffset:-80  }
                 );
             vectorLayer.addFeatures(feature);
         {% endfor %}
@@ -70,13 +70,13 @@
         function createPopup(feature) {
           feature.popup = new OpenLayers.Popup.Anchored("pop",
               feature.geometry.getBounds().getCenterLonLat(),
-              new OpenLayers.Size(200,200),
+              null,
               '<div class="markerContent">'+feature.attributes.description+'</div>',
               null,
               false,
               function() { controls['selector'].unselectAll(); }
           );
-          feature.popup.relativePosition ="bl";
+
           //feature.popup.closeOnMove = true;
           map.addPopup(feature.popup);
         }
