@@ -11,6 +11,8 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Mapping\Entity;
 use App\Utils\LocationOfferSlugManager;
 use App\Entity\ContractType;
+use App\Entity\OfferType;
+use phpDocumentor\Reflection\Location;
 
 class CreateSlugSubscriber implements EventSubscriber
 {
@@ -58,16 +60,30 @@ class CreateSlugSubscriber implements EventSubscriber
     {
         $entity = $args->getObject();
 
-        $offerRepository = $args->getEntityManager()->getRepository(Offer::class);
-        $offer = $offerRepository->findOneBy( $entity);
-
-        $locationOfferRepository = $args->getEntityManager()->getRepository(LocationOffer::class);
-        $locationOffer = $locationOfferRepository->findOneBy($offer);
-
-
-        if ($entity instanceof ContractType)
+        
+        if ($entity instanceof ContractType || $entity instanceof OfferType)
         {
-            $this->slugManager->setSlug($locationOffer);
+            
+            $offers = $entity->getOffers();
+            foreach ($offers as $offer)
+            {
+                $locationOffers = $offer->getLocationOffers();
+
+                foreach ($locationOffers as $locationOffer)
+                {
+                    $this->slugManager->setSlug($locationOffer);
+                }
+            }
+
+        }
+
+        if ($entity instanceof Location || $entity instanceof Offer)
+        {
+            $locationOffers = $entity->getLocationOffers();
+            foreach ($locationOffers as $locationOffer)
+            {
+                $this->slugManager->setSlug($locationOffer);
+            }
         }
     }
 }
