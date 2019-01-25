@@ -9,13 +9,21 @@
 {% block body %}
     <main>
         <div class="card">
-            <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Detail de l'offre</h3>
             <div class="card-body">
+                <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Detail de l'offre</h3>
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
+                <div class="row">
+                    <div class="col-6">
+                        <button style="width: 100%">{{ button_label|default('Save') }}</button>
+                    </div>
+                    <div class="col-6">
+                        <a href="{{ path('admin_offer_index') }}"><button style="width: 100%" >back to list</button></a>
+                    </div>
+                </div>
+                {{ form_end(form) }}
 
-                <button class="btn">{{ button_label|default('Save') }}</button>
-                {{ form_end(form) }}<a href="{{ path('admin_offer_index') }}">back to list</a>
+
             </div>
         </div>
     </main>
