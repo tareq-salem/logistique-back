@@ -41,14 +41,17 @@
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+
                 $postuler = $form->getData();
                 var_dump($postuler);
+
 
                 $candidate = $candidateRepository->insertNewCandidate(
                     $postuler['firstname'],
                     $postuler['lastname'],
                     $postuler['email']
                 );
+
 
 
                 $candidature = $candidatureRepository->insertNewCandidature(

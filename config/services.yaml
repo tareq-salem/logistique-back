@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    candidatures_upload_folder: '%kernel.project_dir%/public/uploads/candidatures'
 
 services:
     # default configuration for services in *this* file
@@ -33,3 +34,11 @@ services:
     App\EventListener\CreateSlugSubscriber:
         tags:
             - { name: 'doctrine.event_subscriber' }
+
+    #App\EventListener\FileUploderSubscriber:
+    #    tags:
+    #        - { name: 'doctrine.event_subscriber' }
+
+    App\Utils\CandidatureUploader:
+        arguments:
+            $targetDirectory: '%candidatures_upload_folder%'
