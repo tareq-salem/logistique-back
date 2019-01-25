@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class PostulerType extends AbstractType
 {
@@ -27,7 +28,17 @@ class PostulerType extends AbstractType
                 'label' => 'Curriculum vitae', 
                 'attr' => ['class' => 'form-control-file']
             ])    
-            ->add('lm', FileType::class, ['label' => 'Lettre de motivation'])
+            ->add('lm', FileType::class, [
+                'label' => 'Lettre de motivation',
+                'constraints' => new Assert\File([
+                    'maxSize' => '1024k',
+                    'mimeTypes' => [
+                        'application/pdf',
+                        'application/x-pdf',
+                    ],
+                    'mimeTypesMessage' => 'Please upload a valid PDF',
+                ])
+            ])
             ->add('message', TextareaType::class, [
                 'attr' => ['class' => 'textarea']
             ]);

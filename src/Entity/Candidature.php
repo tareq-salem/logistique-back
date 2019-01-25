@@ -37,8 +37,11 @@ class Candidature extends SuperClass
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
-     * @Assert\File(mimeTypes={ "application/pdf" })
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Please upload a valid PDF"
+     * )
      */
     private $resume;
 
