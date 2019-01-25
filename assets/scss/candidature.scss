@@ -1,4 +1,4 @@
-@import 'variables'; 
+@import 'template'; 
 
 main {
     padding-top: 125px; 
@@ -8,23 +8,19 @@ main {
     object-fit: contain;
 
     section {
-        max-width: 650px;
+        max-width: 610px;
         margin: auto;
         padding: 20px;
-        background-color: lightgray; 
-        border-radius: 10px; 
-        
+        background-color: #343a40; 
+        border-radius: 0.25rem; 
     }
 
     label {
         color: $color-white; 
     }
 
-    textarea {
-        width: 100%; 
+    .textarea {
         height: 200px; 
-        margin: 10px 0; 
-        border-radius: 10px; 
     }
 
     button {

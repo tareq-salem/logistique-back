@@ -67,7 +67,7 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}/edit", name="admin_offer_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="admin_offer_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Offer $offer): Response
     {
