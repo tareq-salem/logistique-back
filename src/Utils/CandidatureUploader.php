@@ -9,10 +9,12 @@ class CandidatureUploader
 {
 
     private $targetDirectory;
+    private $targetDirWeb;
 
-    public function __construct($targetDirectory)
+    public function __construct($targetDirectory, $targetDirWeb)
     {
         $this->targetDirectory = $targetDirectory;
+        $this->targetDirWeb = $targetDirWeb;
     }
     /**
      * @return mixed
@@ -39,6 +41,7 @@ class CandidatureUploader
        catch (FileException $fileException){
            $fileException->getMessage();
        }
+       $filename = $this->targetDirWeb.$filename;
 
        return $filename;
     }

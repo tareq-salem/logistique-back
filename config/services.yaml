@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    web_folder: '/uploads/candidatures/'
     candidatures_upload_folder: '%kernel.project_dir%/public/uploads/candidatures'
 
 services:
@@ -42,3 +43,4 @@ services:
     App\Utils\CandidatureUploader:
         arguments:
             $targetDirectory: '%candidatures_upload_folder%'
+            $targetDirWeb: '%web_folder%'
